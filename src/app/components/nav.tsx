@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import { FaHeadphonesAlt } from 'react-icons/fa';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Nav() {
 const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,7 +11,7 @@ return (
     <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
     <div className="container mx-auto px-4 py-4 flex justify-between items-center">
 
-        <a href="/" className="flex items-center text-blue-600 text-2xl font-bold no-underline">
+        <Link href="/" className="flex items-center text-blue-600 text-2xl font-bold no-underline">
         <Image
         src="/tersus-logo.png"
         alt="Logo-tersus"
@@ -19,7 +19,7 @@ return (
         height={50}
         className="hover:scale-3d"
         />
-        </a>
+        </Link>
         <div className="md:hidden">
         <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -39,8 +39,8 @@ return (
         </div>
 
         <ul className={`md:flex md:space-x-8 md:items-center ${isMobileMenuOpen ? 'block' : 'hidden'} absolute md:relative top-full left-0 right-0 bg-white md:bg-transparent shadow-md md:shadow-none py-4 md:py-0 px-4 md:px-0 z-10 w-full md:w-auto`}>
-        <li><a href="/" className="block py-2 md:py-0 text-blue-600 font-semibold hover:text-blue-700">Inicio</a></li>
-        <li><a href="/nosotros" className="block py-2 md:py-0 text-gray-700 font-semibold hover:text-blue-600">Nosotros</a></li>
+        <li><Link href="/" className="block py-2 md:py-0 text-blue-600 font-semibold hover:text-blue-700">Inicio</Link></li>
+        <li><Link href="/nosotros" className="block py-2 md:py-0 text-gray-700 font-semibold hover:text-blue-600">Nosotros</Link></li>
         
         <li className="relative">
             <button
@@ -56,16 +56,16 @@ return (
             </button>
             {isServicesDropdownOpen && (
             <ul className="absolute md:top-full left-0 md:left-auto md:right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-20">
-                <li><a href="/hogar" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Hogar</a></li>
-                <li><a href="/corporativo" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Corporativo</a></li>
-                <li><a href="/productos" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Productos</a></li>
-                <li><a href="/lavanderia" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Lavandería</a></li>
-                <li><a href="/tapiceria" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Tapicería</a></li>
+                <li><Link href="/hogar" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Hogar</Link></li>
+                <li><Link href="/corporativo" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Corporativo</Link></li>
+                <li><Link href="/productos" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Productos</Link></li>
+                <li><Link href="/lavanderia" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Lavandería</Link></li>
+                <li><Link href="/tapiceria" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Tapicería</Link></li>
             </ul>
             )}
         </li>
         
-        <li><a href="/contacto" className="block py-2 md:py-0 text-gray-700 font-semibold hover:text-blue-600">Contacto</a></li>
+        <li><Link href="/contacto" className="block py-2 md:py-0 text-gray-700 font-semibold hover:text-blue-600">Contacto</Link></li>
         </ul>
     </div>
     </nav>

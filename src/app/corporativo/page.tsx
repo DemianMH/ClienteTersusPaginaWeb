@@ -1,23 +1,19 @@
-// Corporativo.tsx
 "use client";
 
-import React, { useState, useEffect, useRef, MouseEvent, TouchEvent } from 'react';
+import React, { useState, useEffect, useRef, MouseEvent, TouchEvent, useCallback } from 'react';
 import Loyout from "../layout";
 import Footer from "@/app/components/footer";
 import Nav from "@/app/components/nav";
 import Image from 'next/image';
-// Asegúrate de que FaSparkles esté disponible, si no, usa FaMagic como en Tapiceria.tsx
 import {FaSprayCan, FaCheckCircle, FaUsers, FaShieldAlt, FaAward, FaCalendarAlt, FaLaptop, FaHandsHelping, FaQuestionCircle, FaWhatsapp } from 'react-icons/fa';
 
 interface ServiceItem {
     id: string;
     image: string;
-    // icon?: React.ElementType; // Removido: 'icon' no se usa en ServiceLogoCard
     name: string;
     content: string;
 }
 
-// Service Logos Data Section
 const serviceLogosData: ServiceItem[] = [
     { id: 'tapiceria', image: '/Tapiceria-logo.png', name: 'Limpieza de Tapicería', content: 'Nuestros expertos en limpieza de tapicería restauran la vida de tus muebles, eliminando manchas, olores y alérgenos con técnicas avanzadas y productos seguros. Ideal para sofás de oficina, sillas de conferencia y divisiones de tela.' },
     { id: 'oficinas', image: '/Tersus-logo.png', name: 'Limpieza de Oficinas', content: 'Para tus espacios de trabajo, ofrecemos limpieza especializada de tapicería, incluyendo sillas de oficina, sofás de sala de espera, alfombras modulares y paneles de tela, asegurando un ambiente libre de alérgenos y con una imagen impecable.' },
@@ -31,13 +27,12 @@ interface AvatarItem {
     testimonial: string;
 }
 
-// Avatar Data Section - Actualizado con imágenes de personas
 const avatarData: AvatarItem[] = [
-    { id: 1, image: '/persona1.jpg', name: 'CEO de CorpA', testimonial: "¡Tersus ha transformado nuestras oficinas! El servicio es impecable y el personal muy profesional." },
-    { id: 2, image: '/persona2.jpg', name: 'Director de Operaciones', testimonial: "La eficiencia y atención al detalle de Tersus son excepcionales. Siempre cumplen con los plazos y la calidad." },
-    { id: 3, image: '/persona3.jpg', name: 'Gerente de Recursos Humanos', testimonial: "Un ambiente de trabajo limpio es clave para la moral. Tersus nos ayuda a mantener un espacio saludable y agradable." },
-    { id: 4, image: '/persona4.jpg', name: 'Administrador de Edificios', testimonial: "Su flexibilidad para trabajar fuera de horario es invaluable. Nuestros espacios corporativos siempre lucen perfectos." },
-    { id: 5, image: '/persona5.jpg', name: 'Jefe de Compras', testimonial: "Los productos y el equipo que usa Tersus son de alta calidad, garantizando resultados duraderos y un gran valor." },
+    { id: 1, image: '/persona1.jpg', name: 'CEO de CorpA', testimonial: '¡Tersus ha transformado nuestras oficinas! El servicio es impecable y el personal muy profesional.' },
+    { id: 2, image: '/persona2.jpg', name: 'Director de Operaciones', testimonial: 'La eficiencia y atención al detalle de Tersus son excepcionales. Siempre cumplen con los plazos y la calidad.' },
+    { id: 3, image: '/persona3.jpg', name: 'Gerente de Recursos Humanos', testimonial: 'Un ambiente de trabajo limpio es clave para la moral. Tersus nos ayuda a mantener un espacio saludable y agradable.' },
+    { id: 4, image: '/persona4.jpg', name: 'Administrador de Edificios', testimonial: 'Su flexibilidad para trabajar fuera de horario es invaluable. Nuestros espacios corporativos siempre lucen perfectos.' },
+    { id: 5, image: '/persona5.jpg', name: 'Jefe de Compras', testimonial: 'Los productos y el equipo que usa Tersus son de alta calidad, garantizando resultados duraderos y un gran valor.' },
 ];
 
 
@@ -51,29 +46,25 @@ const galleryImages = [
 
 interface ServiceLogoCardProps {
     service: ServiceItem;
-    isActive: boolean; // Se mantiene para controlar el contenido principal si se desea
     onClick: (id: string) => void;
     isMobile: boolean;
 }
 
-function ServiceLogoCard({ service, isActive, onClick, isMobile }: ServiceLogoCardProps) {
-    // Definimos un único tamaño fijo para todos los logos, sin distinción de activo/inactivo
-    const fixedSize = isMobile ? 100 : 150; // Ejemplo: 100px en móvil, 150px en escritorio
+function ServiceLogoCard({ service, onClick, isMobile }: ServiceLogoCardProps) {
+    const fixedSize = isMobile ? 100 : 150;
 
     return (
         <button
             onClick={() => onClick(service.id)}
-            // Clases para el botón que envuelve la imagen
-            // Todos los logos tienen el mismo tamaño y sombra, y son redondos
             className={`flex-shrink-0 relative rounded-full shadow-lg transition-all duration-300 ease-in-out flex items-center justify-center p-0 hover:scale-105 hover:shadow-xl`}
-            style={{ width: `${fixedSize}px`, height: `${fixedSize}px` }} // Tamaño fijo para todos
+            style={{ width: `${fixedSize}px`, height: `${fixedSize}px` }}
         >
             <Image
                 src={service.image}
                 alt={service.name}
-                width={fixedSize} // El width y height de Image deben coincidir con el tamaño del contenedor
+                width={fixedSize}
                 height={fixedSize}
-                className="rounded-full object-contain" // Todos los logos serán redondos
+                className="rounded-full object-contain"
             />
         </button>
     );
@@ -90,7 +81,7 @@ function TestimonialCard({ image, name, testimonial }: AvatarItem) {
                 className="rounded-full object-cover mb-4 border-4 border-blue-400"
             />
             <h3 className="text-xl font-bold text-gray-800 mb-2">{name}</h3>
-            <p className="text-gray-600 text-sm italic">"{testimonial}"</p>
+            <p className="text-gray-600 text-sm italic">{testimonial}</p>
         </div>
     );
 }
@@ -118,13 +109,13 @@ export default function Corporativo() {
     const [avatarPrevTranslate, setAvatarPrevTranslate] = useState(0);
     const [avatarAnimationEnabled, setAvatarAnimationEnabled] = useState(true);
 
-    const getAvatarSlideWidth = (): number => {
+    const getAvatarSlideWidth = useCallback((): number => {
         if (avatarCarouselRef.current && avatarCarouselRef.current.children.length > 0) {
             const firstCard = avatarCarouselRef.current.children[0] as HTMLElement;
             return firstCard.offsetWidth + 16;
         }
         return 0;
-    };
+    }, []);
 
     const setAvatarSliderTransform = (translate: number): void => {
         if (avatarCarouselRef.current) {
@@ -200,9 +191,8 @@ export default function Corporativo() {
     const avatarCursorClass = isAvatarDragging ? 'cursor-grabbing' : 'cursor-grab';
     const avatarSelectClass = isAvatarDragging ? 'select-none' : '';
 
-    // Main Component Structure
     return (
-        <Loyout title="Servicios Corporativos">
+        <Loyout>
             <Nav />
 
             <div className="relative w-full h-screen overflow-hidden pt-16">
@@ -226,7 +216,6 @@ export default function Corporativo() {
                             <li key={service.id}>
                                 <ServiceLogoCard
                                     service={service}
-                                    isActive={activeServiceId === service.id}
                                     onClick={setActiveServiceId}
                                     isMobile={isMobile}
                                 />

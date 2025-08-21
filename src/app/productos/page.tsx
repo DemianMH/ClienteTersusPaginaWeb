@@ -132,7 +132,7 @@ export default function Catalogo() {
 
     // Main Component Structure
     return (
-        <Loyout title="Catálogo de Productos de Limpieza">
+        <Loyout >
             <Nav />
 
             <div className="relative w-full h-64 md:h-96 overflow-hidden pt-16 flex items-center justify-center">

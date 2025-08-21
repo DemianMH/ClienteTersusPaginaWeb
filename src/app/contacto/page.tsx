@@ -22,7 +22,7 @@ export default function Contacto() {
 
 
     return (
-        <Loyout title="Contacto - Tersus Clean">
+        <Loyout >
             <Nav />
 
             {/* Hero Section */}

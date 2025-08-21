@@ -1,7 +1,8 @@
 "use client";
-import React, { useState, useEffect, useRef, MouseEvent, TouchEvent } from 'react'; // Importa MouseEvent y TouchEvent
-import { FaHeadphonesAlt, FaBuilding, FaHome, FaSprayCan, FaCouch, FaUsers, FaShieldAlt, FaAward, FaTools,FaWhatsapp  } from 'react-icons/fa';
+import React, { useState, useEffect, useRef, MouseEvent, TouchEvent, useCallback } from 'react';
+import { FaBuilding, FaHome, FaSprayCan, FaCouch, FaUsers, FaShieldAlt, FaAward, FaTools,FaWhatsapp  } from 'react-icons/fa';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const data = [
   {
@@ -62,7 +63,7 @@ function Card({ image, title, category }: CardProps) {
 }
 
 
-export default function Home() {
+export default function Inicio() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = data.length;
   
@@ -84,7 +85,6 @@ export default function Home() {
     }
   }, [isMobile, currentSlide, slidesToShow, totalSlides]);
 
-  // Lógica de arrastre
   const carouselTrackRef = useRef<HTMLDivElement>(null); 
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -92,13 +92,13 @@ export default function Home() {
   const [prevTranslate, setPrevTranslate] = useState(0);
   const [animationEnabled, setAnimationEnabled] = useState(true);
 
-  const getSlideWidth = (): number => { 
+  const getSlideWidth = useCallback((): number => { 
       if (carouselTrackRef.current && carouselTrackRef.current.parentElement) {
           const containerWidth = carouselTrackRef.current.parentElement.clientWidth;
           return containerWidth / slidesToShow;
       }
       return 0;
-  };
+  }, [slidesToShow]);
 
   const setSliderTransform = (translate: number): void => {
       if (carouselTrackRef.current) {
@@ -165,7 +165,7 @@ export default function Home() {
         setSliderTransform(snapTranslate);
         setCurrentTranslate(snapTranslate);
     }
-  }, [currentSlide, isMobile, totalSlides, slidesToShow, isDragging]);
+  }, [currentSlide, isDragging, getSlideWidth]);
 
 
   const cursorClass = isDragging ? 'cursor-grabbing' : 'cursor-grab';
@@ -174,7 +174,6 @@ export default function Home() {
 
   return (
     <div>
-      {/* Portada Inicio */}
       <div className="relative w-full h-screen flex flex-col justify-center items-center pt-16">
         <video
           className="absolute inset-0 w-full h-full object-cover z-0"
@@ -201,35 +200,33 @@ export default function Home() {
         <div className="absolute -bottom-16 left-0 right-0 z-20 py-8">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <a href="/corporativo" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
+              <Link href="/corporativo" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
                 <FaBuilding className="text-4xl md:text-5xl mb-2" />
                 <span className="text-sm md:text-base font-semibold">Corporativo</span>
-              </a>
-              <a href="/hogar" className="bg-green-500 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
+              </Link>
+              <Link href="/hogar" className="bg-green-500 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
                 <FaHome className="text-4xl md:text-5xl mb-2" />
                 <span className="text-sm md:text-base font-semibold">Hogar</span>
-              </a>
-              <a href="/productos" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
+              </Link>
+              <Link href="/productos" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
                 <FaSprayCan className="text-4xl md:text-5xl mb-2" />
                 <span className="text-sm md:text-base font-semibold">Productos</span>
-              </a>
-              <a href="/tapiceria" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
+              </Link>
+              <Link href="/tapiceria" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
                 <FaCouch className="text-4xl md:text-5xl mb-2" />
                 <span className="text-sm md:text-base font-semibold">Tapicería</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Sobre nosotros */}
       <div className="container mx-auto px-4 py-8  mt-5 ">
         <div className="w-full h-1 bg-green-500 my-8"></div>
         
         <h2 className='text-black text-center text-3xl font-bold mb-4'>Sobre nosotros</h2>
         <p className='text-black text-lg text-justify py-10'>Lorem ipsum dolor  adipisicing elit. Aliquid nemo inventore, nulla distinctio cum in! Repudiandae corrupti delectus repellendus, officiis culpa illum possimus sapiente temporibus nostrum ipsam quae aperiam velit!</p>
 
-        {/* Video con Logo y Mascota */}
         <div >
             <div className="relative w-full h-64 md:h-96 rounded-xl shadow-lg overflow-hidden">
                 <video
@@ -264,13 +261,11 @@ export default function Home() {
         </div>
       </div>
       
-      {/* Nuestros Servicios */}
       <div className="container mx-auto px-4 py-8 md:py-16">
         <h2 className='text-black text-center text-3xl font-bold mb-4'>Nuestros Servicios</h2>
         <p className='text-black text-lg text-justify py-10'>Lorem ipsum dolor  adipisicing elit. Aliquid nemo inventore, nulla distinctio cum in! Repudiandae corrupti delectus repellendus, officiis culpa illum possimus sapiente temporibus nostrum ipsam quae aperiam velit!</p>
       </div>
 
-      {/* Carrusel */}
       <div className="container mx-auto px-4 py-8 md:py-16 relative">
         <div 
           className={`overflow-hidden ${cursorClass} ${selectClass}`}
@@ -294,7 +289,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Botones de navegación del carrusel */}
         <button
           onClick={prevSlide}
           className="absolute top-1/2 left-0 md:-left-8 -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full shadow-lg z-10"
@@ -310,7 +304,6 @@ export default function Home() {
           &gt;
         </button>
 
-        {/* Indicadores de puntos (dots) */}
         <div className="flex justify-center space-x-2 mt-4">
           {Array.from({ length: totalSlides - slidesToShow + 1 }).map((_, index) => (
             <button
@@ -325,7 +318,6 @@ export default function Home() {
         </div>
       </div>
           <div>
-  {/* Sección: ¿Por qué elegirnos? */}
   <div className="relative py-16 md:py-24 overflow-hidden">
     <Image
       src="/sala-limpia.jpg" 
@@ -360,7 +352,7 @@ export default function Home() {
       </div>
 
       <button className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-500 transition-colors">
-        <a href="">Cotizaciones</a>
+        <Link href="/contacto">Cotizaciones</Link>
       </button>
     </div>
   </div>

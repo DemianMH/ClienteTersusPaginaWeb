@@ -1,12 +1,12 @@
 // Tapiceria.tsx
 "use client";
 
-import React, { useState, useEffect, useRef, MouseEvent, TouchEvent } from 'react';
+import React, { useState, useEffect, useRef, MouseEvent, TouchEvent, useCallback } from 'react';
 import Loyout from "../layout";
 import Footer from "@/app/components/footer";
 import Nav from "@/app/components/nav";
 import Image from 'next/image';
-import { FaChair, FaTint, FaFeatherAlt, FaUsers, FaClock, FaHandsHelping, FaMagic,FaCheckCircle, FaWhatsapp } from 'react-icons/fa'; // Adjusted icons for upholstery context
+import { FaChair, FaTint, FaFeatherAlt, FaClock, FaHandsHelping, FaMagic,FaCheckCircle, FaWhatsapp } from 'react-icons/fa';
 
 interface ServiceItem {
     id: string;
@@ -16,7 +16,6 @@ interface ServiceItem {
     content: string;
 }
 
-// Service Logos Data Section for Upholstery
 const serviceLogosData: ServiceItem[] = [
     { id: 'sofas', image: '/Tapiceria-logo.png', name: 'Limpieza de Sofás y Sillones', content: 'Expertos en devolver la vida a tus sofás, eliminando manchas, olores y alérgenos. Adecuado para todo tipo de telas, dejando tus muebles frescos y como nuevos.' },
     { id: 'alfombras', image: '/Tersus-logo.png', name: 'Limpieza de Alfombras y Tapetes', content: 'Servicio profundo para alfombras y tapetes, eliminando suciedad incrustada y reviviendo los colores. Protegemos las fibras y extendemos la vida de tus revestimientos.' },
@@ -30,7 +29,6 @@ interface AvatarItem {
     testimonial: string;
 }
 
-// Avatar Data Section
 const avatarData: AvatarItem[] = [
     { id: 1, image: '/persona5.jpg', name: 'Ana M., Ama de Casa', testimonial: "¡Mi casa nunca ha estado tan limpia y reluciente! El equipo de Tersus es muy profesional y confiable." },
     { id: 2, image: '/persona2.jpg', name: 'Carlos S., Dueño de Mascota', testimonial: "Con Tersus, no me preocupo por los pelos de mi perro. ¡Mis alfombras lucen como nuevas y el aire es fresco!" },
@@ -90,13 +88,12 @@ function TestimonialCard({ image, name, testimonial }: AvatarItem) {
                 className="rounded-full object-cover mb-4 border-4 border-blue-400"
             />
             <h3 className="text-xl font-bold text-gray-800 mb-2">{name}</h3>
-            <p className="text-gray-600 text-sm italic">"{testimonial}"</p>
+            <p className="text-gray-600 text-sm italic">{testimonial}</p>
         </div>
     );
 }
 
 export default function Tapiceria() {
-    // Set initial active service to the first upholstery service
     const [activeServiceId, setActiveServiceId] = useState('sofas');
     const activeServiceContent = serviceLogosData.find(s => s.id === activeServiceId)?.content;
 
@@ -119,13 +116,13 @@ export default function Tapiceria() {
     const [avatarPrevTranslate, setAvatarPrevTranslate] = useState(0);
     const [avatarAnimationEnabled, setAvatarAnimationEnabled] = useState(true);
 
-    const getAvatarSlideWidth = (): number => {
+    const getAvatarSlideWidth = useCallback((): number => {
         if (avatarCarouselRef.current && avatarCarouselRef.current.children.length > 0) {
             const firstCard = avatarCarouselRef.current.children[0] as HTMLElement;
             return firstCard.offsetWidth + 16;
         }
         return 0;
-    };
+    }, []);
 
     const setAvatarSliderTransform = (translate: number): void => {
         if (avatarCarouselRef.current) {
@@ -192,25 +189,22 @@ export default function Tapiceria() {
         }
     }, [currentAvatarSlide, isAvatarDragging, getAvatarSlideWidth]);
 
-
     const getClientX = (e: MouseEvent | TouchEvent): number => {
         return (e as TouchEvent).touches ? (e as TouchEvent).touches[0].clientX : (e as MouseEvent).clientX;
     };
 
-
     const avatarCursorClass = isAvatarDragging ? 'cursor-grabbing' : 'cursor-grab';
     const avatarSelectClass = isAvatarDragging ? 'select-none' : '';
 
-    // Main Component Structure
     return (
-        <Loyout title="Servicios de Limpieza de Tapicería">
+        <Loyout>
             <Nav />
 
             <div className="relative w-full h-screen overflow-hidden pt-16">
                 <video
                     className="absolute inset-0 w-full h-full object-cover z-0"
-                    src="/corporativo.mp4" // General video, ideally replace with upholstery-specific one
-                    poster="/Tapiceria-logo.png" // Using upholstery logo as poster
+                    src="/corporativo.mp4"
+                    poster="/Tapiceria-logo.png"
                     autoPlay
                     loop
                     muted
@@ -248,7 +242,7 @@ export default function Tapiceria() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-16 md:py-24 mt-16 md:mt-24">
+            <div className="container mx-auto px-4 py-16 md:py-24">
                 <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Nuestros Proyectos de Tapicería</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {galleryImages.map((img, index) => (
@@ -329,7 +323,7 @@ export default function Tapiceria() {
             <div className="relative py-16 md:py-24 overflow-hidden mt-16 md:mt-24 bg-blue-800">
                 <video
                     className="absolute inset-0 w-full h-full object-cover z-0"
-                    src="/corporativo.mp4" // General video
+                    src="/corporativo.mp4"
                     poster="/Tapiceria-logo.png"
                     autoPlay
                     loop

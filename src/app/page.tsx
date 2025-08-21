@@ -8,7 +8,7 @@ import Inicio from "@/app/components/Inicio";
 
 export default function Home() {
   return (
-    <Loyout title="Inicio">
+    <Loyout >
       <Nav />
       <Inicio />
       <Footer/>

@@ -10,7 +10,7 @@ import { FaUsers, FaHandshake, FaStar, FaLightbulb, FaCheckCircle, FaLeaf, FaAwa
 
 export default function Nosotros() {
     return (
-        <Loyout title="Sobre Nosotros - Tersus Clean">
+        <Loyout >
             <Nav />
 
             {/* Hero Section */}

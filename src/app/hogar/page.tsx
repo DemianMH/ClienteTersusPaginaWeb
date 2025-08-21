@@ -1,12 +1,11 @@
-// Hogar.tsx
 "use client";
 
-import React, { useState, useEffect, useRef, MouseEvent, TouchEvent } from 'react';
+import React, { useState, useEffect, useRef, MouseEvent, TouchEvent, useCallback } from 'react';
 import Loyout from "../layout";
 import Footer from "@/app/components/footer";
 import Nav from "@/app/components/nav";
 import Image from 'next/image';
-import {FaSprayCan, FaCheckCircle, FaUsers, FaShieldAlt, FaAward, FaCalendarAlt, FaLaptop, FaHandsHelping, FaQuestionCircle, FaWhatsapp } from 'react-icons/fa';
+import {FaSprayCan, FaCheckCircle, FaUsers, FaShieldAlt, FaAward, FaCalendarAlt, FaLaptop, FaHandsHelping, FaWhatsapp } from 'react-icons/fa';
 
 interface ServiceItem {
     id: string;
@@ -15,7 +14,6 @@ interface ServiceItem {
     content: string;
 }
 
-// Service Logos Data Section
 const serviceLogosData: ServiceItem[] = [
     { id: 'general', image: '/Tersus-logo.png', name: 'Limpieza General del Hogar', content: 'Ofrecemos una limpieza profunda y completa para cada rincón de tu hogar, asegurando un ambiente fresco y saludable. Desde cocinas hasta baños, cuidamos cada detalle.' },
     { id: 'tapiceria_hogar', image: '/Tapiceria-logo.png', name: 'Limpieza de Alfombras y Tapicería', content: 'Especialistas en la limpieza de alfombras, sofás, sillones y sillas del hogar, eliminando manchas, olores y reviviendo los colores de tus textiles con técnicas seguras y efectivas.' },
@@ -29,13 +27,12 @@ interface AvatarItem {
     testimonial: string;
 }
 
-// Avatar Data Section
 const avatarData: AvatarItem[] = [
-    { id: 1, image: '/persona5.jpg', name: 'Ana M., Ama de Casa', testimonial: "¡Mi casa nunca ha estado tan limpia y reluciente! El equipo de Tersus es muy profesional y confiable." },
-    { id: 2, image: '/persona2.jpg', name: 'Carlos S., Dueño de Mascota', testimonial: "Con Tersus, no me preocupo por los pelos de mi perro. ¡Mis alfombras lucen como nuevas y el aire es fresco!" },
-    { id: 3, image: '/persona3.jpg', name: 'Sofía L., Profesional Ocupada', testimonial: "Gracias a Tersus, tengo más tiempo para mí y mi familia. El servicio es impecable y se adaptan a mis horarios." },
-    { id: 4, image: '/persona4.jpg', name: 'Roberto G., Decorador', testimonial: "La limpieza de tapicería fue asombrosa. Mis muebles antiguos parecen recién comprados. ¡Recomiendo Tersus a todos mis clientes!" },
-    { id: 5, image: '/persona1.jpg', name: 'Familia R., Hogar Grande', testimonial: "Con tres niños, mantener la casa limpia era un desafío. Tersus lo hace parecer fácil. ¡Son la mejor inversión!" },
+    { id: 1, image: '/persona5.jpg', name: 'Ana M., Ama de Casa', testimonial: '¡Mi casa nunca ha estado tan limpia y reluciente! El equipo de Tersus es muy profesional y confiable.' },
+    { id: 2, image: '/persona2.jpg', name: 'Carlos S., Dueño de Mascota', testimonial: 'Con Tersus, no me preocupo por los pelos de mi perro. ¡Mis alfombras lucen como nuevas y el aire es fresco!' },
+    { id: 3, image: '/persona3.jpg', name: 'Sofía L., Profesional Ocupada', testimonial: 'Gracias a Tersus, tengo más tiempo para mí y mi familia. El servicio es impecable y se adaptan a mis horarios.' },
+    { id: 4, image: '/persona4.jpg', name: 'Roberto G., Decorador', testimonial: 'La limpieza de tapicería fue asombrosa. Mis muebles antiguos parecen recién comprados. ¡Recomiendo Tersus a todos mis clientes!' },
+    { id: 5, image: '/persona1.jpg', name: 'Familia R., Hogar Grande', testimonial: 'Con tres niños, mantener la casa limpia era un desafío. Tersus lo hace parecer fácil. ¡Son la mejor inversión!' },
 ];
 
 const galleryImages = [
@@ -48,12 +45,11 @@ const galleryImages = [
 
 interface ServiceLogoCardProps {
     service: ServiceItem;
-    isActive: boolean; 
     onClick: (id: string) => void;
     isMobile: boolean;
 }
 
-function ServiceLogoCard({ service, isActive, onClick, isMobile }: ServiceLogoCardProps) {
+function ServiceLogoCard({ service, onClick, isMobile }: ServiceLogoCardProps) {
 
     const fixedSize = isMobile ? 100 : 150; 
 
@@ -85,7 +81,7 @@ function TestimonialCard({ image, name, testimonial }: AvatarItem) {
                 className="rounded-full object-cover mb-4 border-4 border-blue-400"
             />
             <h3 className="text-xl font-bold text-gray-800 mb-2">{name}</h3>
-            <p className="text-gray-600 text-sm italic">"{testimonial}"</p>
+            <p className="text-gray-600 text-sm italic">{testimonial}</p>
         </div>
     );
 }
@@ -113,13 +109,13 @@ export default function Hogar() {
     const [avatarPrevTranslate, setAvatarPrevTranslate] = useState(0);
     const [avatarAnimationEnabled, setAvatarAnimationEnabled] = useState(true);
 
-    const getAvatarSlideWidth = (): number => {
+    const getAvatarSlideWidth = useCallback((): number => {
         if (avatarCarouselRef.current && avatarCarouselRef.current.children.length > 0) {
             const firstCard = avatarCarouselRef.current.children[0] as HTMLElement;
             return firstCard.offsetWidth + 16;
         }
         return 0;
-    };
+    }, []);
 
     const setAvatarSliderTransform = (translate: number): void => {
         if (avatarCarouselRef.current) {
@@ -195,9 +191,8 @@ export default function Hogar() {
     const avatarCursorClass = isAvatarDragging ? 'cursor-grabbing' : 'cursor-grab';
     const avatarSelectClass = isAvatarDragging ? 'select-none' : '';
 
-    // Main Component Structure
     return (
-        <Loyout title="Hogar">
+        <Loyout>
             <Nav />
 
             <div className="relative w-full h-screen overflow-hidden pt-16">
@@ -221,7 +216,6 @@ export default function Hogar() {
                             <li key={service.id}>
                                 <ServiceLogoCard
                                     service={service}
-                                    isActive={activeServiceId === service.id}
                                     onClick={setActiveServiceId}
                                     isMobile={isMobile}
                                 />
@@ -242,7 +236,7 @@ export default function Hogar() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-16 md:py-24 mt-16 md:mt-24">
+            <div className="container mx-auto px-4 py-16 md:py-24">
                 <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Galería de Proyectos en Hogares</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {galleryImages.map((img, index) => (
@@ -387,30 +381,6 @@ export default function Hogar() {
                             ></button>
                         ))}
                     </div>
-                </div>
-            </div>
-
-            <div className="container mx-auto px-4 py-16 md:py-24">
-                <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Preguntas Frecuentes del Hogar</h2>
-                <div className="max-w-3xl mx-auto space-y-4">
-                    <details className="bg-white p-6 rounded-lg shadow-md cursor-pointer">
-                        <summary className="font-semibold text-lg text-gray-800 flex justify-between items-center">
-                            ¿Qué tipo de horarios de limpieza ofrecen para el hogar? <FaQuestionCircle className="text-blue-600" />
-                        </summary>
-                        <p className="mt-4 text-gray-600">Nos adaptamos a tu comodidad. Ofrecemos horarios flexibles durante el día, incluyendo fines de semana, para no interrumpir tu rutina diaria.</p>
-                    </details>
-                    <details className="bg-white p-6 rounded-lg shadow-md cursor-pointer">
-                        <summary className="font-semibold text-lg text-gray-800 flex justify-between items-center">
-                            ¿Los productos de limpieza son seguros para niños y mascotas? <FaQuestionCircle className="text-blue-600" />
-                        </summary>
-                        <p className="mt-4 text-gray-600">Sí, priorizamos la seguridad de tu familia. Utilizamos productos ecológicos, no tóxicos y biodegradables que son completamente seguros para niños, mascotas y personas con alergias.</p>
-                    </details>
-                    <details className="bg-white p-6 rounded-lg shadow-md cursor-pointer">
-                        <summary className="font-semibold text-lg text-gray-800 flex justify-between items-center">
-                            ¿Puedo programar limpiezas recurrentes para mi hogar? <FaQuestionCircle className="text-blue-600" />
-                        </summary>
-                        <p className="mt-4 text-gray-600">Absolutamente. Puedes programar limpiezas semanales, quincenales o mensuales, según tu necesidad. Ofrecemos paquetes recurrentes para tu mayor comodidad y ahorro.</p>
-                    </details>
                 </div>
             </div>
 

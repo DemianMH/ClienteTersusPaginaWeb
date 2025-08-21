@@ -1,12 +1,11 @@
-// Lavanderia.tsx
 "use client";
 
-import React, { useState, useEffect, useRef, MouseEvent, TouchEvent } from 'react';
+import React, { useState, useEffect, useRef, MouseEvent, TouchEvent, useCallback } from 'react';
 import Loyout from "../layout";
 import Footer from "@/app/components/footer";
 import Nav from "@/app/components/nav";
 import Image from 'next/image';
-import { FaTshirt, FaHandsHelping, FaClock, FaCheckCircle, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa'; // Adjusted icons for laundry context
+import { FaTshirt, FaHandsHelping, FaClock, FaCheckCircle, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
 
 interface ServiceItem {
     id: string;
@@ -16,7 +15,6 @@ interface ServiceItem {
     content: string;
 }
 
-// Service Logos Data Section for Laundry
 const serviceLogosData: ServiceItem[] = [
     { id: 'lavanderia_autoservicio', image: '/logolavanderia.png', name: 'Lavandería Autoservicio', content: 'Utiliza nuestras modernas máquinas de lavado y secado de alta eficiencia para tus prendas. Ambiente cómodo y siempre limpio.' },
 ];
@@ -27,13 +25,12 @@ interface AvatarItem {
     name: string;
     testimonial: string;
 }
-// Avatar Data Section
 const avatarData: AvatarItem[] = [
-    { id: 1, image: '/persona5.jpg', name: 'Ana M., Ama de Casa', testimonial: "¡Mi casa nunca ha estado tan limpia y reluciente! El equipo de Tersus es muy profesional y confiable." },
-    { id: 2, image: '/persona2.jpg', name: 'Carlos S., Dueño de Mascota', testimonial: "Con Tersus, no me preocupo por los pelos de mi perro. ¡Mis alfombras lucen como nuevas y el aire es fresco!" },
-    { id: 3, image: '/persona3.jpg', name: 'Sofía L., Profesional Ocupada', testimonial: "Gracias a Tersus, tengo más tiempo para mí y mi familia. El servicio es impecable y se adaptan a mis horarios." },
-    { id: 4, image: '/persona4.jpg', name: 'Roberto G., Decorador', testimonial: "La limpieza de tapicería fue asombrosa. Mis muebles antiguos parecen recién comprados. ¡Recomiendo Tersus a todos mis clientes!" },
-    { id: 5, image: '/persona1.jpg', name: 'Familia R., Hogar Grande', testimonial: "Con tres niños, mantener la casa limpia era un desafío. Tersus lo hace parecer fácil. ¡Son la mejor inversión!" },
+    { id: 1, image: '/persona5.jpg', name: 'Ana M., Ama de Casa', testimonial: '¡Mi casa nunca ha estado tan limpia y reluciente! El equipo de Tersus es muy profesional y confiable.' },
+    { id: 2, image: '/persona2.jpg', name: 'Carlos S., Dueño de Mascota', testimonial: 'Con Tersus, no me preocupo por los pelos de mi perro. ¡Mis alfombras lucen como nuevas y el aire es fresco!' },
+    { id: 3, image: '/persona3.jpg', name: 'Sofía L., Profesional Ocupada', testimonial: 'Gracias a Tersus, tengo más tiempo para mí y mi familia. El servicio es impecable y se adaptan a mis horarios.' },
+    { id: 4, image: '/persona4.jpg', name: 'Roberto G., Decorador', testimonial: 'La limpieza de tapicería fue asombrosa. Mis muebles antiguos parecen recién comprados. ¡Recomiendo Tersus a todos mis clientes!' },
+    { id: 5, image: '/persona1.jpg', name: 'Familia R., Hogar Grande', testimonial: 'Con tres niños, mantener la casa limpia era un desafío. Tersus lo hace parecer fácil. ¡Son la mejor inversión!' },
 ];
 
 const galleryImages = [
@@ -87,13 +84,12 @@ function TestimonialCard({ image, name, testimonial }: AvatarItem) {
                 className="rounded-full object-cover mb-4 border-4 border-blue-400"
             />
             <h3 className="text-xl font-bold text-gray-800 mb-2">{name}</h3>
-            <p className="text-gray-600 text-sm italic">"{testimonial}"</p>
+            <p className="text-gray-600 text-sm italic">{testimonial}</p>
         </div>
     );
 }
 
 export default function Lavanderia() {
-    // CAMBIO CLAVE: Cambiado de 'lavado_secado' a 'lavanderia_autoservicio' para que el logo de lavandería sea grande por defecto
     const [activeServiceId, setActiveServiceId] = useState('lavanderia_autoservicio');
     const activeServiceContent = serviceLogosData.find(s => s.id === activeServiceId)?.content;
 
@@ -116,13 +112,13 @@ export default function Lavanderia() {
     const [avatarPrevTranslate, setAvatarPrevTranslate] = useState(0);
     const [avatarAnimationEnabled, setAvatarAnimationEnabled] = useState(true);
 
-    const getAvatarSlideWidth = (): number => {
+    const getAvatarSlideWidth = useCallback((): number => {
         if (avatarCarouselRef.current && avatarCarouselRef.current.children.length > 0) {
             const firstCard = avatarCarouselRef.current.children[0] as HTMLElement;
             return firstCard.offsetWidth + 16;
         }
         return 0;
-    };
+    }, []);
 
     const setAvatarSliderTransform = (translate: number): void => {
         if (avatarCarouselRef.current) {
@@ -198,16 +194,15 @@ export default function Lavanderia() {
     const avatarCursorClass = isAvatarDragging ? 'cursor-grabbing' : 'cursor-grab';
     const avatarSelectClass = isAvatarDragging ? 'select-none' : '';
 
-    // Main Component Structure
     return (
-        <Loyout title="Servicios de Lavandería y Planchaduría">
+        <Loyout>
             <Nav />
 
             <div className="relative w-full h-screen overflow-hidden pt-16">
                 <video
                     className="absolute inset-0 w-full h-full object-cover z-0"
-                    src="/corporativo.mp4" // Reusing general video for now, ideally replace with a laundry-specific one
-                    poster="/logolavanderia.png" // Using laundry logo as poster
+                    src="/corporativo.mp4"
+                    poster="/logolavanderia.png"
                     autoPlay
                     loop
                     muted
@@ -245,7 +240,7 @@ export default function Lavanderia() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-16 md:py-24 mt-16 md:mt-24">
+            <div className="container mx-auto px-4 py-16 md:py-24">
                 <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Nuestras Instalaciones y Trabajos</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {galleryImages.map((img, index) => (
@@ -326,7 +321,7 @@ export default function Lavanderia() {
             <div className="relative py-16 md:py-24 overflow-hidden mt-16 md:mt-24 bg-blue-800">
                 <video
                     className="absolute inset-0 w-full h-full object-cover z-0"
-                    src="/corporativo.mp4" // Reusing general video
+                    src="/corporativo.mp4"
                     poster="/logolavanderia.png"
                     autoPlay
                     loop
@@ -402,7 +397,7 @@ export default function Lavanderia() {
                     </p>
                     <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center text-gray-500 text-sm">      
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1866.5204480068305!2d-103.41604562410777!3d20.73039755866173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428aee658df8d07%3A0xc484b93b8f67341e!2sAv.%20Independencia%202550%2C%20Granja%20Luz%20Aid%C3%A9%2C%2045200%20Zapopan%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" // Reemplaza esto con tu src real
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1866.5204480068305!2d-103.41604562410777!3d20.73039755866173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428aee658df8d07%3A0xc484b93b8f67341e!2sAv.%20Independencia%202550%2C%20Granja%20Luz%20Aid%C3%A9%2C%2045200%20Zapopan%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
@@ -413,7 +408,7 @@ export default function Lavanderia() {
                         ></iframe>
                     </div>
                     <a
-                        href="https://share.google/iUQlv2KOJdRnoRkQa" // Your original share link
+                        href="https://share.google/iUQlv2KOJdRnoRkQa"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-6 inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-full font-bold text-lg hover:bg-blue-700 transition-colors shadow-lg"
