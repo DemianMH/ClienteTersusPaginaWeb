@@ -20,7 +20,7 @@ interface ServiceItem {
 const serviceLogosData: ServiceItem[] = [
     { id: 'sofas', image: '/Tapiceria-logo.png', name: 'Limpieza de Sofás y Sillones', content: 'Expertos en devolver la vida a tus sofás, eliminando manchas, olores y alérgenos. Adecuado para todo tipo de telas, dejando tus muebles frescos y como nuevos.' },
     { id: 'alfombras', image: '/Tersus-logo.png', name: 'Limpieza de Alfombras y Tapetes', content: 'Servicio profundo para alfombras y tapetes, eliminando suciedad incrustada y reviviendo los colores. Protegemos las fibras y extendemos la vida de tus revestimientos.' },
-    { id: 'sillas_oficina', image: '/mascota-tersus.png', name: 'Limpieza de Sillas de Oficina', content: 'Mantenemos tus sillas de oficina libres de manchas y suciedad, mejorando la higiene y la imagen de tu espacio de trabajo. Ideal para tela y piel sintética.' },
+    { id: 'sillas_oficina', image: '/logolavanderia.png', name: 'Limpieza de Sillas de Oficina', content: 'Mantenemos tus sillas de oficina libres de manchas y suciedad, mejorando la higiene y la imagen de tu espacio de trabajo. Ideal para tela y piel sintética.' },
 ];
 
 interface AvatarItem {
@@ -30,21 +30,21 @@ interface AvatarItem {
     testimonial: string;
 }
 
-// Avatar Data Section for Upholstery Testimonials
+// Avatar Data Section
 const avatarData: AvatarItem[] = [
-    { id: 1, image: '/Tapiceria-logo.png', name: 'Sofía M., Diseñadora', testimonial: "Mis sofás parecían perdidos, pero Tersus los dejó impecables. ¡Un trabajo asombroso que superó mis expectativas!" },
-    { id: 2, image: '/mascota-tersus.png', name: 'Roberto C., Dueño de Café', testimonial: "Las sillas de mi cafetería reciben mucho uso. Con Tersus, siempre lucen limpias y listas para los clientes." },
-    { id: 3, image: '/Tersus-logo.png', name: 'Elena P., Ama de Casa', testimonial: "Mis alfombras tenían manchas difíciles y olían a humedad. ¡Tersus las rescató por completo, ahora huelen a fresco y se ven fabulosas!" },
-    { id: 4, image: '/sala-limpia.jpg', name: 'Carlos L., Abogado', testimonial: "El servicio a domicilio fue muy conveniente. Limpiaron la tapicería de mi oficina sin interrupciones y con gran profesionalismo." },
-    { id: 5, image: '/logolavanderia.png', name: 'Andrea F., Familia Numerosa', testimonial: "Con niños y mascotas, la limpieza de tapicería es esencial. Tersus es mi solución, siempre rápido y eficaz. ¡Gracias!" },
+    { id: 1, image: '/persona5.jpg', name: 'Ana M., Ama de Casa', testimonial: "¡Mi casa nunca ha estado tan limpia y reluciente! El equipo de Tersus es muy profesional y confiable." },
+    { id: 2, image: '/persona2.jpg', name: 'Carlos S., Dueño de Mascota', testimonial: "Con Tersus, no me preocupo por los pelos de mi perro. ¡Mis alfombras lucen como nuevas y el aire es fresco!" },
+    { id: 3, image: '/persona3.jpg', name: 'Sofía L., Profesional Ocupada', testimonial: "Gracias a Tersus, tengo más tiempo para mí y mi familia. El servicio es impecable y se adaptan a mis horarios." },
+    { id: 4, image: '/persona4.jpg', name: 'Roberto G., Decorador', testimonial: "La limpieza de tapicería fue asombrosa. Mis muebles antiguos parecen recién comprados. ¡Recomiendo Tersus a todos mis clientes!" },
+    { id: 5, image: '/persona1.jpg', name: 'Familia R., Hogar Grande', testimonial: "Con tres niños, mantener la casa limpia era un desafío. Tersus lo hace parecer fácil. ¡Son la mejor inversión!" },
 ];
 
 const galleryImages = [
-    { src: '/Tapiceria-logo.png', alt: 'Sofá limpio y reluciente' },
-    { src: '/sala-limpia.jpg', alt: 'Alfombra con limpieza profunda' },
-    { src: '/Tersus-logo.png', alt: 'Sillas de oficina impecables' },
-    { src: '/mascota-tersus.png', alt: 'Mueble antes y después de la limpieza' },
-    { src: '/logolavanderia.png', alt: 'Equipo especializado en acción' },
+    { src: '/sala-limpia-4.jpg', alt: 'Sala de Hogar Limpia' },
+    { src: '/sala-limpia-5.jpg', alt: 'Equipo Tersus limpiando cocina de hogar' },
+    { src: '/sala-limpia-6.jpg', alt: 'Mueble de sala de hogar limpio' },
+    { src: '/sala-limpia-2.jpg', alt: 'Ventanas de hogar limpias' },
+    { src: '/sala-limpia-3.jpg', alt: 'Baño de hogar reluciente' },
 ];
 
 interface ServiceLogoCardProps {

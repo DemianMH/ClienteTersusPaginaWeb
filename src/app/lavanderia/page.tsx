@@ -27,22 +27,21 @@ interface AvatarItem {
     name: string;
     testimonial: string;
 }
-
-// Avatar Data Section for Laundry Testimonials
+// Avatar Data Section
 const avatarData: AvatarItem[] = [
-    { id: 1, image: '/logolavanderia.png', name: 'Laura G., Estudiante', testimonial: "¡La lavandería de Tersus es mi salvación! Rápida, limpia y siempre tienen espacio. ¡Me encanta el autoservicio!" },
-    { id: 2, image: '/mascota-tersus.png', name: 'Pedro R., Gerente', testimonial: "Mis camisas siempre perfectas. El servicio de planchado es de primera y me ahorra muchísimo tiempo cada semana." },
-    { id: 3, image: '/Tersus-logo.png', name: 'Mónica V., Mamá', testimonial: "Dejo la ropa de toda mi familia y siempre me la entregan impecable y bien doblada. Un servicio súper confiable." },
-    { id: 4, image: '/sala-limpia.jpg', name: 'Diego L., Viajero', testimonial: "Ideal para cuando estoy de paso, lavo y seco mi ropa rápidamente. Las instalaciones son muy cómodas y seguras." },
-    { id: 5, image: '/Tapiceria-logo.png', name: 'Carmen H., Diseñadora', testimonial: "Mis telas delicadas las confío solo a Tersus. El cuidado que le dan a la ropa es excepcional. ¡Siempre impecable!" },
+    { id: 1, image: '/persona5.jpg', name: 'Ana M., Ama de Casa', testimonial: "¡Mi casa nunca ha estado tan limpia y reluciente! El equipo de Tersus es muy profesional y confiable." },
+    { id: 2, image: '/persona2.jpg', name: 'Carlos S., Dueño de Mascota', testimonial: "Con Tersus, no me preocupo por los pelos de mi perro. ¡Mis alfombras lucen como nuevas y el aire es fresco!" },
+    { id: 3, image: '/persona3.jpg', name: 'Sofía L., Profesional Ocupada', testimonial: "Gracias a Tersus, tengo más tiempo para mí y mi familia. El servicio es impecable y se adaptan a mis horarios." },
+    { id: 4, image: '/persona4.jpg', name: 'Roberto G., Decorador', testimonial: "La limpieza de tapicería fue asombrosa. Mis muebles antiguos parecen recién comprados. ¡Recomiendo Tersus a todos mis clientes!" },
+    { id: 5, image: '/persona1.jpg', name: 'Familia R., Hogar Grande', testimonial: "Con tres niños, mantener la casa limpia era un desafío. Tersus lo hace parecer fácil. ¡Son la mejor inversión!" },
 ];
 
 const galleryImages = [
-    { src: '/logolavanderia.png', alt: 'Máquinas de lavandería modernas' },
-    { src: '/sala-limpia.jpg', alt: 'Ropa planchada y doblada' },
-    { src: '/Tersus-logo.png', alt: 'Interior de lavandería limpio' },
-    { src: '/mascota-tersus.png', alt: 'Canastas de ropa organizada' },
-    { src: '/Tapiceria-logo.png', alt: 'Detalle de planchado profesional' },
+    { src: '/lavanderia_lavadoras', alt: 'Sala de Hogar Limpia' },
+    { src: '/sala-limpia-5.jpg', alt: 'Equipo Tersus limpiando cocina de hogar' },
+    { src: '/sala-limpia-6.jpg', alt: 'Mueble de sala de hogar limpio' },
+    { src: '/sala-limpia-2.jpg', alt: 'Ventanas de hogar limpias' },
+    { src: '/sala-limpia-3.jpg', alt: 'Baño de hogar reluciente' },
 ];
 
 interface ServiceLogoCardProps {

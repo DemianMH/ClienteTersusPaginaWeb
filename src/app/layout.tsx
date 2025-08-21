@@ -25,4 +25,3 @@ export default function loyout({ children, title ="Tersus" }: LayoutProps) {
     
   );
 }
-
