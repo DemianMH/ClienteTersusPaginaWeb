@@ -8,8 +8,8 @@ return (
                 <nav>
                 <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-gray-700 text-sm md:text-base font-medium">
                     <li><a href="/nosotros" className="hover:text-blue-600 transition-colors duration-200">Sobre nosotros</a></li>
-                    <li><a href="/hogar" className="hover:text-blue-600 transition-colors duration-200">Hogar</a></li>
-                    <li><a href="/corporativo" className="hover:text-blue-600 transition-colors duration-200">Corporativo</a></li>
+                    <li><a href="/tapiceria" className="hover:text-blue-600 transition-colors duration-200">Tapicería</a></li>
+                    <li><a href="/lavanderia" className="hover:text-blue-600 transition-colors duration-200">Lavandería</a></li>
                     <li><a href="/productos" className="hover:text-blue-600 transition-colors duration-200">Productos de Limpieza</a></li>
                     <li><a href="/contacto" className="hover:text-blue-600 transition-colors duration-200">Contacto</a></li>
                 </ul>

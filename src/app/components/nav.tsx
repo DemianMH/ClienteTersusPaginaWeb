@@ -1,73 +1,119 @@
 "use client";
-import React, { useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+
+const logoLinks = [
+{ src: '/Tersus-logo.png', href: '/', alt: 'Tersus Principal' },
+{ src: '/logolavanderia.png', href: '/lavanderia', alt: 'Lavandería' },
+{ src: '/Tapiceria-logo.png', href: '/tapiceria', alt: 'Tapicería' },
+{ src: '/Productos-logo.png', href: '/productos', alt: 'Productos' },
+];
+
+const textLinks = [
+{ href: '/nosotros', label: 'Nosotros' },
+{ href: '/contacto', label: 'Contacto' },
+];
+
+const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
+<svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+</svg>
+);
+
+const HomeIcon = (props: React.SVGProps<SVGSVGElement>) => (
+<svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+</svg>
+);
 
 export default function Nav() {
+const [mainLogo, setMainLogo] = useState(logoLinks[0]);
 const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+
+const dropdownLogos = logoLinks.filter(logo => logo.href !== mainLogo.href);
+
+const handleMobileLinkClick = (logo: typeof logoLinks[number] | null) => {
+    if (logo) {
+    setMainLogo(logo);
+    }
+    setIsMobileMenuOpen(false);
+};
 
 return (
-    <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
-    <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+    <>
+    <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-40">
+        <div className="container mx-auto px-4 flex justify-between items-center h-16">
 
-        <Link href="/" className="flex items-center text-blue-600 text-2xl font-bold no-underline">
-        <Image
-        src="/tersus-logo.png"
-        alt="Logo-tersus"
-        width={50}
-        height={50}
-        className="hover:scale-3d"
-        />
-        </Link>
-        <div className="md:hidden">
-        <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-gray-600 focus:outline-none focus:text-gray-800"
-            aria-label="Toggle navigation"
-        >
-            {isMobileMenuOpen ? (
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-            ) : (
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            )}
-        </button>
+          {/* --- Versión Desktop --- */}
+        <div className="hidden md:flex flex-1"></div>
+        <div className="hidden md:flex flex-1 justify-center">
+            <div className="relative group">
+            <Link href={mainLogo.href}>
+                <Image src={mainLogo.src} alt={mainLogo.alt} width={50} height={50} objectFit="contain" className="transition-transform duration-300 group-hover:scale-110"/>
+            </Link>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-max opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-[-10px]">
+                <div className="flex items-center gap-x-5">
+                {dropdownLogos.map((logo) => (
+                    <Link key={logo.href} href={logo.href} onClick={() => setMainLogo(logo)} className="transition-transform hover:scale-110">
+                    <div className="bg-white/30 backdrop-blur-md p-1.5 rounded-full shadow-lg">
+                        <Image src={logo.src} alt={logo.alt} width={150} height={150} className="rounded-full"/>
+                    </div>
+                    </Link>
+                ))}
+                </div>
+            </div>
+            </div>
         </div>
-
-        <ul className={`md:flex md:space-x-8 md:items-center ${isMobileMenuOpen ? 'block' : 'hidden'} absolute md:relative top-full left-0 right-0 bg-white md:bg-transparent shadow-md md:shadow-none py-4 md:py-0 px-4 md:px-0 z-10 w-full md:w-auto`}>
-        <li><Link href="/" className="block py-2 md:py-0 text-blue-600 font-semibold hover:text-blue-700">Inicio</Link></li>
-        <li><Link href="/nosotros" className="block py-2 md:py-0 text-gray-700 font-semibold hover:text-blue-600">Nosotros</Link></li>
-        
-        <li className="relative">
-            <button
-            onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
-            className="flex items-center text-gray-700 font-semibold hover:text-blue-600 py-2 md:py-0 focus:outline-none"
-            aria-expanded={isServicesDropdownOpen}
-            aria-haspopup="true"
-            >
-            Servicios
-            <svg className={`ml-1 h-4 w-4 transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-            </button>
-            {isServicesDropdownOpen && (
-            <ul className="absolute md:top-full left-0 md:left-auto md:right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-20">
-                <li><Link href="/hogar" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Hogar</Link></li>
-                <li><Link href="/corporativo" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Corporativo</Link></li>
-                <li><Link href="/productos" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Productos</Link></li>
-                <li><Link href="/lavanderia" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Lavandería</Link></li>
-                <li><Link href="/tapiceria" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Tapicería</Link></li>
+        <div className="hidden md:flex flex-1 justify-end">
+            <ul className="flex space-x-8 items-center">
+            {textLinks.map((link) => (
+                <li key={link.href}><Link href={link.href} className="text-gray-700 font-semibold hover:text-blue-600 transition-colors">{link.label}</Link></li>
+            ))}
             </ul>
-            )}
-        </li>
+        </div>
         
-        <li><Link href="/contacto" className="block py-2 md:py-0 text-gray-700 font-semibold hover:text-blue-600">Contacto</Link></li>
-        </ul>
-    </div>
+          {/* --- Versión Mobile --- */}
+        <div className="md:hidden flex-1">
+            <button onClick={() => setIsMobileMenuOpen(true)} aria-label="Abrir menú">
+            <MenuIcon className="h-6 w-6 text-gray-700"/>
+            </button>
+        </div>
+        <div className="md:hidden flex-1 flex justify-center">
+            <Link href={mainLogo.href}>
+            <Image src={mainLogo.src} alt={mainLogo.alt} width={50} height={50} objectFit="contain"/>
+            </Link>
+        </div>
+        <div className="md:hidden flex-1"></div>
+
+        </div>
     </nav>
+
+      {/* --- Panel del Menú Mobile (Slide-in) --- */}
+    <div className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="fixed inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)}></div>
+        <div className={`fixed top-0 left-0 bottom-0 bg-white w-72 shadow-xl p-5 transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="flex flex-col h-full">
+            <nav className="flex flex-col gap-y-2 text-lg">
+            <Link href="/" onClick={() => handleMobileLinkClick(logoLinks[0])} className="flex items-center gap-x-4 py-3 px-2 rounded-md hover:bg-gray-100">
+                <HomeIcon className="h-6 w-6 text-blue-600"/>
+                <span className="font-semibold text-gray-700">Inicio</span>
+            </Link>
+            <hr className="my-2"/>
+            {logoLinks.filter(l => l.href !== '/').map((logo) => (
+                <Link key={logo.href} href={logo.href} onClick={() => handleMobileLinkClick(logo)} className="flex items-center rounded-md hover:bg-gray-100">
+                <Image src={logo.src} alt={logo.alt} width={110} height={110} className="rounded-full bg-white/30 backdrop-blur-md p-0.5"/>
+                </Link>
+            ))}
+            <hr className="my-2"/>
+            {textLinks.map((link) => (
+                <Link key={link.href} href={link.href} onClick={() => handleMobileLinkClick(null)} className="py-3 px-2 rounded-md hover:bg-gray-100 font-semibold text-gray-700">{link.label}</Link>
+            ))}
+            </nav>
+        </div>
+        </div>
+    </div>
+    </>
 );
 }

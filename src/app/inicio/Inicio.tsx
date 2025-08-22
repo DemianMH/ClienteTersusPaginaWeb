@@ -1,33 +1,33 @@
 "use client";
 import React, { useState, useEffect, useRef, MouseEvent, TouchEvent, useCallback } from 'react';
-import { FaBuilding, FaHome, FaSprayCan, FaCouch, FaUsers, FaShieldAlt, FaAward, FaTools,FaWhatsapp  } from 'react-icons/fa';
+import { FaUsers, FaShieldAlt, FaAward, FaTools,FaWhatsapp  } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const data = [
   {
     image: '/lavanderia_lavadoras.png',
-    title: 'lorem ipsum dolor ',
+    title: 'Servicios de Lavandería de Primera Calidad',
     category: 'Lavandería',
   },
   {
     image: '/tapiceria-trabajo.jpg',
-    title: 'lorem ipsum dolor ',
+    title: 'Renovación y Cuidado para tus Muebles',
     category: 'Tapiceria',
   },
   {
     image: '/sala-limpia-2.jpg',
-    title: 'lorem ipsum dolor ',
+    title: 'Tu Hogar Impecable, Nuestro Compromiso',
     category: 'Limpieza de Hogar',
   },
   {
     image: '/sala-limpia-3.jpg',
-    title: 'lorem ipsum dolor ',
+    title: 'Espacios de Trabajo Limpios y Productivos',
     category: 'Limpieza Corporativa',
   },
   {
     image: '/productos-limpieza.jpg',
-    title: 'lorem ipsum dolor ',
+    title: 'Los Mejores Productos para una Limpieza Perfecta',
     category: 'Productos de Limpieza',
   },
 ];
@@ -62,11 +62,9 @@ function Card({ image, title, category }: CardProps) {
   );
 }
 
-
 export default function Inicio() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = data.length;
-  
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
   const slidesToShow = isMobile ? 1 : 2;
@@ -85,14 +83,14 @@ export default function Inicio() {
     }
   }, [isMobile, currentSlide, slidesToShow, totalSlides]);
 
-  const carouselTrackRef = useRef<HTMLDivElement>(null); 
+  const carouselTrackRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [currentTranslate, setCurrentTranslate] = useState(0);
   const [prevTranslate, setPrevTranslate] = useState(0);
   const [animationEnabled, setAnimationEnabled] = useState(true);
 
-  const getSlideWidth = useCallback((): number => { 
+  const getSlideWidth = useCallback((): number => {
       if (carouselTrackRef.current && carouselTrackRef.current.parentElement) {
           const containerWidth = carouselTrackRef.current.parentElement.clientWidth;
           return containerWidth / slidesToShow;
@@ -110,14 +108,14 @@ export default function Inicio() {
     return (e as TouchEvent).touches ? (e as TouchEvent).touches[0].clientX : (e as MouseEvent).clientX;
   };
 
-  const handleStart = (e: MouseEvent | TouchEvent): void => { 
+  const handleStart = (e: MouseEvent | TouchEvent): void => {
       setIsDragging(true);
       setStartX(getClientX(e));
       setPrevTranslate(currentTranslate);
       setAnimationEnabled(false);
   };
 
-  const handleMove = (e: MouseEvent | TouchEvent): void => { 
+  const handleMove = (e: MouseEvent | TouchEvent): void => {
       if (!isDragging) return;
       const dragDistance = getClientX(e) - startX;
       let newTranslate = prevTranslate + dragDistance;
@@ -125,12 +123,12 @@ export default function Inicio() {
       const maxTranslate = 0;
       const minTranslate = -(totalSlides - slidesToShow) * getSlideWidth();
       newTranslate = Math.max(minTranslate, Math.min(newTranslate, maxTranslate));
-      
+
       setSliderTransform(newTranslate);
       setCurrentTranslate(newTranslate);
   };
 
-  const handleEnd = (): void => { 
+  const handleEnd = (): void => {
       setIsDragging(false);
       setAnimationEnabled(true);
 
@@ -139,10 +137,9 @@ export default function Inicio() {
 
       let newSlideIndex = currentSlide;
 
-
       if (movedBy > 50 && currentSlide > 0) {
           newSlideIndex = currentSlide - 1;
-      } else if (movedBy < -50 && currentSlide < totalSlides - slidesToShow) { 
+      } else if (movedBy < -50 && currentSlide < totalSlides - slidesToShow) {
           newSlideIndex = currentSlide + 1;
       }
 
@@ -152,9 +149,9 @@ export default function Inicio() {
       setCurrentTranslate(snapTranslate);
   };
 
-  const handleMouseLeave = (): void => { 
+  const handleMouseLeave = (): void => {
       if (isDragging) {
-          handleEnd(); 
+          handleEnd();
       }
   };
 
@@ -171,7 +168,6 @@ export default function Inicio() {
   const cursorClass = isDragging ? 'cursor-grabbing' : 'cursor-grab';
   const selectClass = isDragging ? 'select-none' : '';
 
-
   return (
     <div>
       <div className="relative w-full h-screen flex flex-col justify-center items-center pt-16">
@@ -185,7 +181,7 @@ export default function Inicio() {
           playsInline
           preload="auto"
         ></video>
-        <div className="absolute inset-0 bg-blue-700 opacity-60 z-0"></div>
+        <div className="absolute inset-0 bg-blue-700 opacity-30 z-0"></div>
 
         <div className="shadow-white relative z-10 w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full bg-white flex items-center justify-center backdrop-blur-2xl shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl">
               <Image
@@ -195,37 +191,14 @@ export default function Inicio() {
                       height={300}
                       className="object-contain w-full h-full"
                       />
-            </div>
-
-        <div className="absolute -bottom-16 left-0 right-0 z-20 py-8">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Link href="/corporativo" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
-                <FaBuilding className="text-4xl md:text-5xl mb-2" />
-                <span className="text-sm md:text-base font-semibold">Corporativo</span>
-              </Link>
-              <Link href="/hogar" className="bg-green-500 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
-                <FaHome className="text-4xl md:text-5xl mb-2" />
-                <span className="text-sm md:text-base font-semibold">Hogar</span>
-              </Link>
-              <Link href="/productos" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
-                <FaSprayCan className="text-4xl md:text-5xl mb-2" />
-                <span className="text-sm md:text-base font-semibold">Productos</span>
-              </Link>
-              <Link href="/tapiceria" className="bg-blue-700 text-white rounded-lg p-4 md:p-6 flex flex-col items-center justify-center text-center shadow-lg transform transition-transform hover:scale-105">
-                <FaCouch className="text-4xl md:text-5xl mb-2" />
-                <span className="text-sm md:text-base font-semibold">Tapicería</span>
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-8  mt-5 ">
         <div className="w-full h-1 bg-green-500 my-8"></div>
-        
+
         <h2 className='text-black text-center text-3xl font-bold mb-4'>Sobre nosotros</h2>
-        <p className='text-black text-lg text-justify py-10'>Lorem ipsum dolor  adipisicing elit. Aliquid nemo inventore, nulla distinctio cum in! Repudiandae corrupti delectus repellendus, officiis culpa illum possimus sapiente temporibus nostrum ipsam quae aperiam velit!</p>
+        <p className='text-black text-lg text-justify py-10'>Somos un equipo de profesionales dedicados a ofrecerte soluciones de limpieza integrales. Nuestra misión es transformar tus espacios, brindando un ambiente fresco, saludable y reluciente. Con años de experiencia y productos de la más alta calidad, garantizamos tu satisfacción en cada servicio.</p>
 
         <div >
             <div className="relative w-full h-64 md:h-96 rounded-xl shadow-lg overflow-hidden">
@@ -253,21 +226,21 @@ export default function Inicio() {
                 <Image
                   src="/mascota-tersus.png"
                   alt="Mascota de Tersus"
-                  width={400} 
-                  height={400} 
+                  width={400}
+                  height={400}
                   className="absolute bottom-0 left-0 z-20 w-48 h-auto object-contain md:w-64 transform translate-x-[-15%] translate-y-[15%]"
                 />
             </div>
         </div>
       </div>
-      
+
       <div className="container mx-auto px-4 py-8 md:py-16">
         <h2 className='text-black text-center text-3xl font-bold mb-4'>Nuestros Servicios</h2>
-        <p className='text-black text-lg text-justify py-10'>Lorem ipsum dolor  adipisicing elit. Aliquid nemo inventore, nulla distinctio cum in! Repudiandae corrupti delectus repellendus, officiis culpa illum possimus sapiente temporibus nostrum ipsam quae aperiam velit!</p>
+        <p className='text-black text-lg text-justify py-10'>Ofrecemos una amplia gama de servicios de limpieza para satisfacer todas tus necesidades. Desde la limpieza profunda de tu hogar hasta soluciones corporativas especializadas, nuestro equipo está listo para brindarte un servicio de excelencia. Descubre todo lo que podemos hacer por ti.</p>
       </div>
 
       <div className="container mx-auto px-4 py-8 md:py-16 relative">
-        <div 
+        <div
           className={`overflow-hidden ${cursorClass} ${selectClass}`}
           onMouseDown={handleStart}
           onMouseMove={handleMove}
@@ -281,11 +254,11 @@ export default function Inicio() {
             ref={carouselTrackRef}
             className={`flex ${animationEnabled ? 'transition-transform duration-500 ease-in-out' : ''}`}
           >
-            {data.map((item, index) => ( 
-  <div key={index} className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-1/2'} p-2`}>
-    <Card {...item} />
-  </div>
-))}
+            {data.map((item, index) => (
+              <div key={index} className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-1/2'} p-2`}>
+                <Card {...item} />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -317,48 +290,46 @@ export default function Inicio() {
           ))}
         </div>
       </div>
-          <div>
-  <div className="relative py-16 md:py-24 overflow-hidden">
-    <Image
-      src="/sala-limpia.jpg" 
-      alt="Fondo de la sección Por qué elegirnos"
-      fill
-      style={{ objectFit: 'cover' }}
-      className="z-0"
-    />
-    <div className="absolute inset-0 bg-blue-900 opacity-80 z-0"></div>
+      <div>
+        <div className="relative py-16 md:py-24 overflow-hidden">
+            <Image
+            src="/sala-limpia.jpg"
+            alt="Fondo de la sección Por qué elegirnos"
+            fill
+            style={{ objectFit: 'cover' }}
+            className="z-0"
+            />
+            <div className="absolute inset-0 bg-blue-900 opacity-80 z-0"></div>
 
-    <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
-      <h2 className="text-white text-center font-bold text-4xl mb-4">¿Por qué elegirnos?</h2>
-      <div className="w-24 h-1 bg-green-500 mx-auto mb-12"></div>
+            <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+            <h2 className="text-white text-center font-bold text-4xl mb-4">¿Por qué elegirnos?</h2>
+            <div className="w-24 h-1 bg-green-500 mx-auto mb-12"></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        <div className="flex flex-col items-center text-center p-4">
-          <FaUsers className="text-green-500 text-5xl mb-2" />
-          <h3 className="font-semibold text-white text-lg">Profesionales de Limpieza Calificados</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div className="flex flex-col items-center text-center p-4">
+                <FaUsers className="text-green-500 text-5xl mb-2" />
+                <h3 className="font-semibold text-white text-lg">Profesionales de Limpieza Calificados</h3>
+                </div>
+                <div className="flex flex-col items-center text-center p-4">
+                <FaShieldAlt className="text-green-500 text-5xl mb-2" />
+                <h3 className="font-semibold text-white text-lg">Totalmente Asegurados y Garantizados</h3>
+                </div>
+                <div className="flex flex-col items-center text-center p-4">
+                <FaAward className="text-green-500 text-5xl mb-2" />
+                <h3 className="font-semibold text-white text-lg">Personal Experimentado</h3>
+                </div>
+                <div className="flex flex-col items-center text-center p-4">
+                <FaTools className="text-green-500 text-5xl mb-2" />
+                <h3 className="font-semibold text-white text-lg">Suministros de Limpieza de Calidad</h3>
+                </div>
+            </div>
+
+            <button className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-500 transition-colors">
+                <Link href="/contacto">Cotizaciones</Link>
+            </button>
+            </div>
         </div>
-        <div className="flex flex-col items-center text-center p-4">
-          <FaShieldAlt className="text-green-500 text-5xl mb-2" />
-          <h3 className="font-semibold text-white text-lg">Totalmente Asegurados y Garantizados</h3>
         </div>
-        <div className="flex flex-col items-center text-center p-4">
-          <FaAward className="text-green-500 text-5xl mb-2" />
-          <h3 className="font-semibold text-white text-lg">Personal Experimentado</h3>
-        </div>
-        <div className="flex flex-col items-center text-center p-4">
-          <FaTools className="text-green-500 text-5xl mb-2" />
-          <h3 className="font-semibold text-white text-lg">Suministros de Limpieza de Calidad</h3>
-        </div>
-      </div>
-
-      <button className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-500 transition-colors">
-        <Link href="/contacto">Cotizaciones</Link>
-      </button>
-    </div>
-  </div>
-</div>
-
-
     </div>
   );
 }

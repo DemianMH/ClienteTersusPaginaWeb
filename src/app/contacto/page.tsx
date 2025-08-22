@@ -3,8 +3,7 @@
 
 import React from 'react';
 import Loyout from "../layout";
-import Footer from "@/app/components/footer";
-import Nav from "@/app/components/nav";
+
 import Image from 'next/image';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebook, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 
@@ -16,15 +15,11 @@ export default function Contacto() {
     const facebookLink = "https://www.facebook.com/tersuscleanguadalajara";
     const tiktokLink = "https://www.tiktok.com/@tersus.clean.gdl?_t=8gR9niEXuje&_r=1";
 
-    // Reemplaza este SRC con el código de inserción real de Google Maps.
-    // Sigue las instrucciones a continuación para obtenerlo.
     const googleMapsEmbedSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.428498816823!2d-103.4154435255474!3d20.73024889759458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428aee658df8d07%3A0xc484b93b8f67341e!2sProl%20Av.%20Laureles%20453%2C%20Industrial%20La%20Cantera%2C%2045157%20Zapopan%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx";
 
 
     return (
-        <Loyout >
-            <Nav />
-
+        <>
             {/* Hero Section */}
             <div className="relative w-full h-80 md:h-96 overflow-hidden pt-16 flex items-center justify-center">
                 <Image
@@ -127,7 +122,7 @@ export default function Contacto() {
                 </div>
             </div>
 
-            <Footer />
-        </Loyout>
+
+        </>
     );
 }
