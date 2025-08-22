@@ -1,10 +1,6 @@
 // Catalogo.tsx
 "use client";
-
 import React, { useState, useEffect } from 'react';
-import Loyout from "../layout";
-import Footer from "@/app/components/footer";
-import Nav from "@/app/components/nav";
 import Image from 'next/image';
 import { FaSearch, FaFilter, FaInfoCircle, FaTimes } from 'react-icons/fa'; // Added FaInfoCircle and FaTimes for mobile button
 
@@ -184,9 +180,8 @@ export default function Catalogo() {
 
     // Main Component Structure
     return (
-        <Loyout >
-            <Nav />
-
+        <>
+        
             <div className="relative w-full h-64 md:h-96 overflow-hidden pt-16 flex items-center justify-center">
                 <Image
                     src="/productos-limpieza.jpg"
@@ -245,7 +240,7 @@ export default function Catalogo() {
                 )}
             </div>
 
-            <Footer />
-        </Loyout>
+
+        </>
     );
 }

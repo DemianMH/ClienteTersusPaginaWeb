@@ -1,15 +1,12 @@
 "use client";
 import React, { useState } from 'react';
-import Loyout from "../layout";
-import Footer from "@/app/components/footer";
-import Nav from "@/app/components/nav";
 import Image from 'next/image';
 import { FaHome, FaBuilding, FaTshirt, FaHandsHelping, FaClock, FaCheckCircle, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
 
 const galleryImages = [
     { src: '/lavanderia_lavadoras.png', alt: 'Lavadoras modernas en Tersus' },
-    { src: '/sala-limpia-5.jpg', alt: 'Ropa limpia y doblada profesionalmente' },
-    { src: '/sala-limpia-6.jpg', alt: 'Instalaciones limpias y acogedoras' },
+    { src: '/localtersus.png', alt: 'Ropa limpia y doblada profesionalmente' },
+    { src: '/lavanderiascamaras.png', alt: 'Instalaciones limpias y acogedoras' },
 ];
 
 const LavanderiaPage = () => {
@@ -141,7 +138,6 @@ const LavanderiaPage = () => {
                 </a>
             </div>
         </div>
-      <Footer />
     </>
   );
 };

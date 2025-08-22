@@ -1,9 +1,6 @@
-// Contacto.tsx
 "use client";
 
 import React from 'react';
-import Loyout from "../layout";
-
 import Image from 'next/image';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebook, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 
@@ -15,7 +12,11 @@ export default function Contacto() {
     const facebookLink = "https://www.facebook.com/tersuscleanguadalajara";
     const tiktokLink = "https://www.tiktok.com/@tersus.clean.gdl?_t=8gR9niEXuje&_r=1";
 
+    // Link para el mapa incrustado (iframe)
     const googleMapsEmbedSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.428498816823!2d-103.4154435255474!3d20.73024889759458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428aee658df8d07%3A0xc484b93b8f67341e!2sProl%20Av.%20Laureles%20453%2C%20Industrial%20La%20Cantera%2C%2045157%20Zapopan%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx";
+    
+    // NUEVO LINK para el botón "Abrir en Google Maps"
+    const googleMapsLink = "https://maps.app.goo.gl/WEFqgsM1x6UCUViF7";
 
 
     return (
@@ -23,7 +24,7 @@ export default function Contacto() {
             {/* Hero Section */}
             <div className="relative w-full h-80 md:h-96 overflow-hidden pt-16 flex items-center justify-center">
                 <Image
-                    src="/persona_trabajando.png" // O alguna otra imagen representativa para contacto
+                    src="/persona_trabajando.png" 
                     alt="Contacto Tersus Clean"
                     layout="fill"
                     objectFit="cover"
@@ -42,7 +43,6 @@ export default function Contacto() {
                     <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center text-center">
                         <h2 className="text-blue-800 font-bold text-3xl mb-6">Información de Contacto</h2>
                         <div className="space-y-6 w-full max-w-sm">
-                            {/* CAMBIO AQUI: Eliminado 'md:justify-start' */}
                             <div className="flex items-center justify-center gap-4 text-gray-800">
                                 <FaMapMarkerAlt className="text-blue-600 text-3xl" />
                                 <div>
@@ -50,7 +50,6 @@ export default function Contacto() {
                                     <p className="text-md">{address}</p>
                                 </div>
                             </div>
-                            {/* CAMBIO AQUI: Eliminado 'md:justify-start' */}
                             <div className="flex items-center justify-center gap-4 text-gray-800">
                                 <FaPhone className="text-blue-600 text-3xl" />
                                 <div>
@@ -58,7 +57,6 @@ export default function Contacto() {
                                     <a href={`tel:${phoneNumber}`} className="text-md hover:underline">{phoneNumber}</a>
                                 </div>
                             </div>
-                            {/* CAMBIO AQUI: Eliminado 'md:justify-start' */}
                             <div className="flex items-center justify-center gap-4 text-gray-800">
                                 <FaEnvelope className="text-blue-600 text-3xl" />
                                 <div>
@@ -87,7 +85,6 @@ export default function Contacto() {
                     <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center">
                         <h2 className="text-blue-800 font-bold text-3xl mb-6 text-center">Nuestra Ubicación</h2>
                         <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center text-gray-500 text-sm">
-                            {/* AQUI VA EL IFRAME DEL MAPA DE GOOGLE */}
                             <iframe
                                 src={googleMapsEmbedSrc}
                                 width="100%"
@@ -100,7 +97,8 @@ export default function Contacto() {
                             ></iframe>
                         </div>
                         <a
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+                            // CAMBIO APLICADO AQUÍ
+                            href={googleMapsLink}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="mt-6 inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-full font-bold text-lg hover:bg-blue-700 transition-colors shadow-lg"
@@ -121,8 +119,6 @@ export default function Contacto() {
                     </a>
                 </div>
             </div>
-
-
         </>
     );
 }

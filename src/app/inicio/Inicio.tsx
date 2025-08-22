@@ -6,22 +6,22 @@ import Link from 'next/link';
 
 const data = [
   {
-    image: '/lavanderia_lavadoras.png',
+    image: '/lavanderiascamaras.png',
     title: 'Servicios de Lavandería de Primera Calidad',
     category: 'Lavandería',
   },
   {
-    image: '/tapiceria-trabajo.jpg',
+    image: '/sala-limpia-4.jpg',
     title: 'Renovación y Cuidado para tus Muebles',
     category: 'Tapiceria',
   },
   {
-    image: '/sala-limpia-2.jpg',
+    image: '/sala-limpia-6.jpg',
     title: 'Tu Hogar Impecable, Nuestro Compromiso',
     category: 'Limpieza de Hogar',
   },
   {
-    image: '/sala-limpia-3.jpg',
+    image: '/oficinas.jpg',
     title: 'Espacios de Trabajo Limpios y Productivos',
     category: 'Limpieza Corporativa',
   },
@@ -181,7 +181,7 @@ export default function Inicio() {
           playsInline
           preload="auto"
         ></video>
-        <div className="absolute inset-0 bg-blue-700 opacity-30 z-0"></div>
+        <div className="absolute inset-0 bg-blue-700 opacity-20 z-0"></div>
 
         <div className="shadow-white relative z-10 w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full bg-white flex items-center justify-center backdrop-blur-2xl shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl">
               <Image
