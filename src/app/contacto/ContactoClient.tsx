@@ -2,14 +2,15 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebook, FaTiktok, FaWhatsapp } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebook, FaTiktok, FaWhatsapp, FaInstagram  } from 'react-icons/fa';
 
 export default function ContactoClient() {
-    const address = "Av. Cvln. Dr. Atl 556, Monumental, 44320 Guadalajara, Jal.";
+    const address = "Nte. 7 453-Int 202, Conjunto Laureles, 45157 Zapopan, Jal.";
     const phoneNumber = "+52 33 2325 4619";
     const emailAddress = "tersuscleangdl@gmail.com";
     const whatsappLink = "https://wa.me/523323254619?text=Hola%2C%20me%20gustaria%20saber%20mas%20sobre%20sus%20servicios.";
     const facebookLink = "https://www.facebook.com/tersuscleanguadalajara";
+    const instagramLink = "https://www.instagram.com/tersuscleangdl?igsh=bDF5ZDExa2lmaWVx";
     const tiktokLink = "https://www.tiktok.com/@tersus.clean.gdl?_t=8gR9niEXuje&_r=1";
     const googleMapsEmbedSrc = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14929.26012020296!2d-103.3429486!3d20.7011891!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428ae3e74281179%3A0x231c55206254168!2sTersus%20Clean!5e0!3m2!1sen!2smx!4v1724344851235!5m2!1sen!2smx";
     const googleMapsLink = "https://maps.app.goo.gl/WEFqgsM1x6UCUViF7";
@@ -71,6 +72,9 @@ export default function ContactoClient() {
                                 </a>
                                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-green-500 hover:text-green-600 transition-colors">
                                     <FaWhatsapp className="text-4xl" />
+                                </a>
+                                <a  href={instagramLink} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className=" rounded-md bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white hover:opacity-90 transition-opacity">
+                                    <FaInstagram className="text-4xl" /> 
                                 </a>
                             </div>
                         </div>

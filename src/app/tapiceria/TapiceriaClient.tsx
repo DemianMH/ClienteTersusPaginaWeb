@@ -1,7 +1,38 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { FaHome, FaBuilding, FaChair, FaTint, FaFeatherAlt, FaMagic, FaWhatsapp, FaHandsHelping, FaClock, FaCheckCircle } from 'react-icons/fa';
+
+// Componente reutilizable para la galería con logo
+type GaleriaConLogoProps = {
+    imgSrc: string;
+    imgAlt: string;
+    logoSrc: string;
+};
+
+const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc }) => (
+    <div className="relative group rounded-xl shadow-lg overflow-hidden p-2 bg-white">
+        <div className="relative h-64 rounded-lg overflow-hidden">
+            <Image
+                src={imgSrc}
+                alt={imgAlt}
+                layout="fill"
+                objectFit="cover"
+                className="transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+        </div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white/50 rounded-2xl p-2 shadow-lg z-10">
+            <Image
+                src={logoSrc}
+                alt="Logo de la sección"
+                width={40}
+                height={40}
+                className="object-contain"
+            />
+        </div>
+    </div>
+);
 
 
 // Galería de imágenes para Hogar
@@ -18,29 +49,17 @@ const galleryImagesCorporativo = [
     { src: '/oficinas3.jpg', alt: 'Mobiliario de área de espera renovado' },
 ];
 
-// Componente reutilizable para la galería
 type GaleriaDinamicaProps = {
     images: { src: string; alt: string }[];
+    logo: string;
 };
 
-const GaleriaDinamica = ({ images }: GaleriaDinamicaProps) => (
+const GaleriaDinamica = ({ images, logo }: GaleriaDinamicaProps) => (
     <div className="container mx-auto px-4 py-16">
         <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Galería de Proyectos</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {images.map((img, index) => (
-                <div
-                    key={index}
-                    className="group relative rounded-xl shadow-xl overflow-hidden hover:shadow-blue-500/50 transition-shadow duration-300"
-                >
-                    <Image
-                        src={img.src}
-                        alt={img.alt}
-                        width={800}
-                        height={600}
-                        className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-xl"></div>
-                </div>
+                <GaleriaConLogo key={index} imgSrc={img.src} imgAlt={img.alt} logoSrc={logo} />
             ))}
         </div>
     </div>
@@ -48,58 +67,57 @@ const GaleriaDinamica = ({ images }: GaleriaDinamicaProps) => (
 
 
 const TapiceriaClient = () => {
-  const [activeTab, setActiveTab] = React.useState('hogar');
+const [activeTab, setActiveTab] = React.useState('hogar');
 
-  const renderContent = () => {
+const renderContent = () => {
     switch (activeTab) {
-      case 'hogar':
+    case 'hogar':
         return <HogarContent />;
-      case 'corporativo':
+    case 'corporativo':
         return <CorporativoContent />;
-      default:
+    default:
         return <HogarContent />;
     }
-  };
+};
 
-  return (
+return (
     <>
-      <div className="relative w-full h-48 md:h-64 flex items-center justify-center bg-gray-100 pt-16">
-        <div className="absolute inset-0">
-            <Image
-                src="/sala-limpia-6.jpg"
-                alt="Fondo de Tapicería"
-                layout="fill"
-                objectFit="cover"
-                className="opacity-30"
-            />
-        </div>
-        <div className="relative z-10 flex space-x-4">
-          <button
-            onClick={() => setActiveTab('hogar')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-full text-lg font-semibold transition-colors ${
-              activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <FaHome />
-            <span>Para Tú Hogar</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('corporativo')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-full text-lg font-semibold transition-colors ${
-              activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <FaBuilding />
-            <span>Para Tú Negocio</span>
-          </button>
-        </div>
-      </div>
-      <div className="container mx-auto px-4 py-8">
+    <div className="relative w-full h-48 md:h-64 flex items-center justify-center bg-gray-100 pt-16">
+    <div className="absolute inset-0">
+        <Image
+            src="/sala-limpia-6.jpg"
+            alt="Fondo de Tapicería"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-30"
+        />
+    </div>
+    <div className="relative z-10 flex space-x-2 md:space-x-4"> 
+    <button
+        onClick={() => setActiveTab('hogar')}
+        className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
+        activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+        }`}
+    >
+        <FaHome />
+        <span>Para Tú Hogar</span>
+    </button>
+    <button
+        onClick={() => setActiveTab('corporativo')}
+        className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
+        activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+        }`}
+    >
+        <FaBuilding />
+        <span>Para Tú Negocio</span>
+    </button>
+    </div>
+</div>
+    <div className="container mx-auto px-4 py-8">
         {renderContent()}
-      </div>
+    </div>
 
-       {/* Secciones Comunes */}
-      <div className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4 py-16">
             <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Nuestro Proceso de Limpieza de Tapicería</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
@@ -125,22 +143,21 @@ const TapiceriaClient = () => {
             </div>
         </div>
 
-        {/* Renderizado condicional de la galería */}
         {activeTab === 'hogar' ? (
-            <GaleriaDinamica images={galleryImagesHogar} />
+            <GaleriaDinamica images={galleryImagesHogar} logo="/Tapiceria-logo.png" />
         ) : (
-            <GaleriaDinamica images={galleryImagesCorporativo} />
+            <GaleriaDinamica images={galleryImagesCorporativo} logo="/Tapiceria-logo.png" />
         )}
 
     </>
-  );
+);
 };
 
 const HogarContent = () => (
-  <div>
+    <div>
     <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">Limpieza y Renovación de Tapicería para tu Hogar</h1>
     <p className="text-lg text-center text-gray-700 mb-12">
-      Devuélvele la vida a tus muebles con nuestro servicio profesional de limpieza de tapicería. Eliminamos manchas, ácaros y malos olores, dejando tus sofás, sillas y alfombras como nuevos, y creando un ambiente más saludable para tu familia.
+    Renueva por completo tus espacios. Además de nuestra limpieza profesional de tapicería que elimina manchas y ácaros, también ofrecemos servicios expertos de retapizado y restauración de muebles. Dale una nueva vida a tus sofás, sillas y sillones, y disfruta de un ambiente más saludable y elegante en tu hogar.
     </p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center mb-16">
@@ -175,25 +192,25 @@ const HogarContent = () => (
             </a>
         </div>
     </div>
-  </div>
+    </div>
 );
 
 const CorporativoContent = () => (
-  <div>
-    <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">Servicio de Tapicería para Oficinas y Empresas</h1>
+    <div>
+    <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">Soluciones de Tapicería para Negocios y Auditorios</h1>
     <p className="text-lg text-center text-gray-700 mb-12">
-      La imagen de tu negocio es fundamental. Ofrecemos limpieza de sillería, alfombras y muebles de oficina, garantizando un ambiente de trabajo limpio, saludable y profesional para tus empleados y clientes.
-    </p>
+    Proyecta una imagen impecable en cada espacio. Ofrecemos soluciones expertas en limpieza y restauración de tapicería para todo tipo de negocios, desde sillería de oficina y salas de juntas, hasta butacas de auditorios, garantizando un ambiente profesional para tus clientes y colaboradores.
+</p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center mb-16">
         <div className="flex flex-col items-center p-4">
             <FaChair className="text-blue-600 text-5xl mb-3" />
-            <h3 className="font-semibold text-gray-800 text-xl mb-2">Sillería de Oficina</h3>
-            <p className="text-gray-600">Limpieza y desinfección profunda de sillas de oficina, eliminando manchas y ácaros para un entorno de trabajo más sano.</p>
+            <h3 className="font-semibold text-gray-800 text-xl mb-2">Sillas, Bancas y Butacas</h3>
+            <p className="text-gray-600">Limpieza y desinfección profunda de sillas, bancas y butacas de auditorios, eliminando manchas y ácaros para un entorno de trabajo más sano.</p>
         </div>
         <div className="flex flex-col items-center p-4">
             <FaTint className="text-blue-600 text-5xl mb-3" />
-            <h3 className="font-semibold text-gray-800 text-xl mb-2">Alfombras y Corporativas</h3>
+            <h3 className="font-semibold text-gray-800 text-xl mb-2">Alfombras</h3>
             <p className="text-gray-600">Devolvemos el color y la frescura a las alfombras de alto tráfico, mejorando la estética de tus instalaciones.</p>
         </div>
         <div className="flex flex-col items-center p-4">
@@ -217,7 +234,7 @@ const CorporativoContent = () => (
             </a>
         </div>
     </div>
-  </div>
+    </div>
 );
 
 export default TapiceriaClient;

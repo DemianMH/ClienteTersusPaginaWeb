@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { FaHome, FaBuilding, FaTshirt, FaHandsHelping, FaClock, FaCheckCircle, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
 
-// El resto de tu componente de lavandería va aquí...
-// ... (HogarContent, CorporativoContent, galleryImages, etc.)
 
 const galleryImages = [
     { src: '/lavanderia_lavadoras.png', alt: 'Lavadoras modernas en Tersus' },
@@ -123,26 +121,26 @@ export default function LavanderiaClient() {
                 className="opacity-30"
             />
         </div>
-        <div className="relative z-10 flex space-x-4">
-          <button
-            onClick={() => setActiveTab('hogar')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-full text-lg font-semibold transition-colors ${
-              activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <FaHome />
-            <span>Para Tú Hogar</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('corporativo')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-full text-lg font-semibold transition-colors ${
-              activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <FaBuilding />
-            <span>Para Tú Negocio</span>
-          </button>
-        </div>
+        <div className="relative z-10 flex space-x-2 md:space-x-4"> 
+            <button
+                onClick={() => setActiveTab('hogar')}
+                className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
+                activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+                }`}
+            >
+                <FaHome />
+                <span>Para Tú Hogar</span>
+            </button>
+            <button
+                onClick={() => setActiveTab('corporativo')}
+                className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
+                activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+                }`}
+            >
+                <FaBuilding />
+                <span>Para Tú Negocio</span>
+            </button>
+            </div>
       </div>
       <div className="container mx-auto px-4 py-8">
         {renderContent()}

@@ -43,24 +43,26 @@ function Card({ image, title, category }: CardProps) {
   return (
     <div
       style={{ backgroundImage: `url(${image})` }}
-      className="h-[440px] flex flex-col justify-between items-start bg-cover bg-center shadow-md p-8 rounded-md"
+      className="relative h-[440px] bg-cover bg-center shadow-md rounded-md overflow-hidden group"
     >
-      <div>
-        <p className="text-black shadow-black opacity-70 font-bold uppercase text-xs">
-          {category}
-        </p>
-        <h3 className="font-extrabold text-black shadow-black leading-[1.2] text-[32px] mt-2 cursor-default">
-          {title}
-        </h3>
-      </div>
-      <button >
-        <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="bg-green-500 text-white px-4 py-4 rounded-full font-bold text-lg hover:bg-green-600 transition-colors shadow-lg flex items-center justify-center max-w-xs mx-auto">
-          <FaWhatsapp />
+      <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-40 transition-opacity duration-300"></div>
+      <div className="relative z-10 flex flex-col justify-between h-full p-6">
+        <div>
+            <p className="text-white font-bold uppercase text-xs tracking-wider">
+              {category}
+            </p>
+            <h3 className="font-extrabold text-white leading-[1.2] text-[32px] mt-2 cursor-default drop-shadow-lg">
+              {title}
+            </h3>
+        </div>
+        <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="absolute bottom-6 right-6 bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition-colors shadow-lg">
+            <FaWhatsapp className="h-6 w-6" />
         </a>
-      </button>
+      </div>
     </div>
   );
 }
+
 
 export default function Inicio() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -213,13 +215,13 @@ export default function Inicio() {
                     preload="auto"
                 ></video>
 
-                <div className="absolute -top-2 md:-top-2 left-1/2 -translate-x-1/2 bg-white p-4 rounded-lg shadow-xl z-30">
+                <div className="absolute -top-2 md:-top-2 left-1/2 -translate-x-1/2 bg-white/50 p-4 rounded-lg shadow-xl z-30">
                     <Image
                       src="/tersus-logo.png"
                       alt="Logo-tersus"
-                      width={50}
-                      height={50}
-                      className="object-contain w-full h-full"
+                      width={60}
+                      height={60}
+                      className="object-contain"
                       />
                 </div>
 
