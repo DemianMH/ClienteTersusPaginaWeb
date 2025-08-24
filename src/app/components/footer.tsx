@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState, useMemo, useCallback } from 'react';
 
 const logoLinks = [
-    { src: '/Tersus-logo.png', href: '/', alt: 'Tersus Principal', label: 'Inicio' },
+    { src: '/tersus-logo.png', href: '/', alt: 'Tersus Principal', label: 'Inicio' },
     { src: '/logolavanderia.png', href: '/lavanderia', alt: 'Lavandería', label: 'Lavandería y tintorería' },
     { src: '/Tapiceria-logo.png', href: '/tapiceria', alt: 'Tapicería', label: 'Lavado y retapizado de muebles' },
     { src: '/Productos-logo.png', href: '/productos', alt: 'Productos', label: 'Productos de limpieza' },

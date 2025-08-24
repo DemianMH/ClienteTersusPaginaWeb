@@ -39,14 +39,22 @@ const Card = React.memo(function Card({ image, title, category }: CardProps) {
 export default function Inicio() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = data.length;
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-  const slidesToShow = isMobile ? 1 : 2;
+  const [slidesToShow, setSlidesToShow] = useState(2);
   const carouselTrackRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [currentTranslate, setCurrentTranslate] = useState(0);
   const [prevTranslate, setPrevTranslate] = useState(0);
   const [animationEnabled, setAnimationEnabled] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSlidesToShow(window.innerWidth < 640 ? 1 : 2);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + slidesToShow >= totalSlides ? 0 : prev + 1));
@@ -60,7 +68,7 @@ export default function Inicio() {
     if (currentSlide + slidesToShow > totalSlides) {
         setCurrentSlide(Math.max(0, totalSlides - slidesToShow));
     }
-  }, [isMobile, currentSlide, slidesToShow, totalSlides]);
+  }, [currentSlide, slidesToShow, totalSlides]);
 
   const getSlideWidth = useCallback((): number => {
       if (carouselTrackRef.current && carouselTrackRef.current.parentElement) {
@@ -149,7 +157,7 @@ export default function Inicio() {
                 alt="Logo-tersus"
                 width={300}
                 height={300}
-                className="object-contain w-full h-full"
+                className="object-contain w-full h-full p-4"
                 priority
               />
         </div>
@@ -188,7 +196,7 @@ export default function Inicio() {
         >
           <div ref={carouselTrackRef} className={`flex ${animationEnabled ? 'transition-transform duration-500 ease-in-out' : ''}`}>
             {data.map((item) => (
-              <div key={item.image} className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-1/2'} p-2`}>
+              <div key={item.image} className={`flex-shrink-0 ${slidesToShow === 1 ? 'w-full' : 'w-1/2'} p-2`}>
                 <Card {...item} />
               </div>
             ))}
