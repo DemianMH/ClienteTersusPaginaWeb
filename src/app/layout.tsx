@@ -2,7 +2,9 @@ import "./globals.css";
 import Footer from "@/app/components/footer";
 import Nav from "@/app/components/nav";
 import { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
@@ -16,12 +18,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es-MX">
       <head>
-        {/* Link para el logo en la pestaña (favicon) */}
         <link rel="icon" href="/logovectores.svg" type="image/svg+xml" />
       </head>
-      <body className="flex flex-col min-h-screen bg-gray-50">
+      {/* Se aplica la clase de la fuente al body */}
+      <body className={`${inter.className} flex flex-col min-h-screen bg-gray-50`}>
         <Nav />
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

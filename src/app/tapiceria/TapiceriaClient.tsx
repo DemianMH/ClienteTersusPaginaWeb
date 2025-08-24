@@ -3,13 +3,14 @@ import React from 'react';
 import Image from 'next/image';
 import { FaHome, FaBuilding, FaChair, FaTint, FaFeatherAlt, FaMagic, FaWhatsapp, FaHandsHelping, FaClock, FaCheckCircle } from 'react-icons/fa';
 
-// Componente reutilizable para la galería con logo
+// Se definen los tipos para las propiedades del componente
 type GaleriaConLogoProps = {
     imgSrc: string;
     imgAlt: string;
     logoSrc: string;
 };
 
+// Se aplica el tipado al componente
 const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc }) => (
     <div className="relative group rounded-xl shadow-lg overflow-hidden p-2 bg-white">
         <div className="relative h-64 rounded-lg overflow-hidden">
@@ -19,10 +20,11 @@ const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc
                 layout="fill"
                 objectFit="cover"
                 className="transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
             />
             <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
         </div>
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white/50 rounded-2xl p-2 shadow-lg z-10">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white/80 p-2 rounded-full shadow-lg z-10">
             <Image
                 src={logoSrc}
                 alt="Logo de la sección"
@@ -35,14 +37,12 @@ const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc
 );
 
 
-// Galería de imágenes para Hogar
 const galleryImagesHogar = [
     { src: '/sala-limpia-4.jpg', alt: 'Sofá de sala limpio y renovado' },
     { src: '/sala-limpia.jpg', alt: 'Sillas de comedor impecables' },
     { src: '/sala-limpia-2.jpg', alt: 'Interior de auto familiar después de limpieza de tapicería' },
 ];
 
-// Galería de imágenes para Corporativo
 const galleryImagesCorporativo = [
     { src: '/oficinas.jpg', alt: 'Sillas de oficina limpias y desinfectadas' },
     { src: '/oficinas2.jpg', alt: 'Alfombra de oficina después de una limpieza profunda' },
@@ -54,7 +54,7 @@ type GaleriaDinamicaProps = {
     logo: string;
 };
 
-const GaleriaDinamica = ({ images, logo }: GaleriaDinamicaProps) => (
+const GaleriaDinamica: React.FC<GaleriaDinamicaProps> = ({ images, logo }) => (
     <div className="container mx-auto px-4 py-16">
         <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Galería de Proyectos</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -83,36 +83,36 @@ const renderContent = () => {
 return (
     <>
     <div className="relative w-full h-48 md:h-64 flex items-center justify-center bg-gray-100 pt-16">
-    <div className="absolute inset-0">
-        <Image
-            src="/sala-limpia-6.jpg"
-            alt="Fondo de Tapicería"
-            layout="fill"
-            objectFit="cover"
-            className="opacity-30"
-        />
+        <div className="absolute inset-0">
+            <Image
+                src="/sala-limpia-6.jpg"
+                alt="Fondo de Tapicería"
+                layout="fill"
+                objectFit="cover"
+                className="opacity-30"
+            />
+        </div>
+        <div className="relative z-10 flex space-x-2 md:space-x-4"> 
+        <button
+            onClick={() => setActiveTab('hogar')}
+            className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
+            activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+            }`}
+        >
+            <FaHome />
+            <span>Para Tú Hogar</span>
+        </button>
+        <button
+            onClick={() => setActiveTab('corporativo')}
+            className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
+            activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+            }`}
+        >
+            <FaBuilding />
+            <span>Para Tú Negocio</span>
+        </button>
+        </div>
     </div>
-    <div className="relative z-10 flex space-x-2 md:space-x-4"> 
-    <button
-        onClick={() => setActiveTab('hogar')}
-        className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
-        activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-        }`}
-    >
-        <FaHome />
-        <span>Para Tú Hogar</span>
-    </button>
-    <button
-        onClick={() => setActiveTab('corporativo')}
-        className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
-        activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-        }`}
-    >
-        <FaBuilding />
-        <span>Para Tú Negocio</span>
-    </button>
-    </div>
-</div>
     <div className="container mx-auto px-4 py-8">
         {renderContent()}
     </div>
@@ -157,9 +157,8 @@ const HogarContent = () => (
     <div>
     <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">Limpieza y Renovación de Tapicería para tu Hogar</h1>
     <p className="text-lg text-center text-gray-700 mb-12">
-    Renueva por completo tus espacios. Además de nuestra limpieza profesional de tapicería que elimina manchas y ácaros, también ofrecemos servicios expertos de retapizado y restauración de muebles. Dale una nueva vida a tus sofás, sillas y sillones, y disfruta de un ambiente más saludable y elegante en tu hogar.
+        Renueva por completo tus espacios. Además de nuestra limpieza profesional de tapicería que elimina manchas y ácaros, también ofrecemos servicios expertos de retapizado y restauración de muebles. Dale una nueva vida a tus sofás, sillas y sillones, y disfruta de un ambiente más saludable y elegante en tu hogar.
     </p>
-
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center mb-16">
         <div className="flex flex-col items-center p-4">
             <FaChair className="text-blue-600 text-5xl mb-3" />
@@ -182,7 +181,6 @@ const HogarContent = () => (
             <p className="text-gray-600">No solo limpiamos, restauramos la apariencia, el color y la frescura original de tu tapicería.</p>
         </div>
     </div>
-
     <div className="bg-blue-800 py-16 text-white text-center">
         <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold mb-6">¿Tus muebles necesitan una nueva vida?</h2>
@@ -199,9 +197,8 @@ const CorporativoContent = () => (
     <div>
     <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">Soluciones de Tapicería para Negocios y Auditorios</h1>
     <p className="text-lg text-center text-gray-700 mb-12">
-    Proyecta una imagen impecable en cada espacio. Ofrecemos soluciones expertas en limpieza y restauración de tapicería para todo tipo de negocios, desde sillería de oficina y salas de juntas, hasta butacas de auditorios, garantizando un ambiente profesional para tus clientes y colaboradores.
-</p>
-
+        Proyecta una imagen impecable en cada espacio. Ofrecemos soluciones expertas en limpieza y restauración de tapicería para todo tipo de negocios, desde sillería de oficina y salas de juntas, hasta butacas de auditorios, garantizando un ambiente profesional para tus clientes y colaboradores.
+    </p>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center mb-16">
         <div className="flex flex-col items-center p-4">
             <FaChair className="text-blue-600 text-5xl mb-3" />
@@ -224,7 +221,6 @@ const CorporativoContent = () => (
             <p className="text-gray-600">Un espacio de trabajo limpio y cuidado mejora la productividad, la moral y el bienestar general de tu equipo.</p>
         </div>
     </div>
-
     <div className="bg-blue-800 py-16 text-white text-center">
         <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold mb-6">¿Quieres proyectar la mejor imagen de tu negocio?</h2>
