@@ -144,9 +144,9 @@ return (
         </div>
 
         {activeTab === 'hogar' ? (
-            <GaleriaDinamica images={galleryImagesHogar} logo="/Tapiceria-logo.png" />
+            <GaleriaDinamica images={galleryImagesHogar} logo="/tapiceria-logo.png" />
         ) : (
-            <GaleriaDinamica images={galleryImagesCorporativo} logo="/Tapiceria-logo.png" />
+            <GaleriaDinamica images={galleryImagesCorporativo} logo="tapiceria-logo.png" />
         )}
 
     </>

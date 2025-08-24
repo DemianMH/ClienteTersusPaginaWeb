@@ -7,8 +7,8 @@ import { useState, useMemo, useCallback } from 'react';
 const logoLinks = [
     { src: '/tersus-logo.png', href: '/', alt: 'Tersus Principal', label: 'Inicio' },
     { src: '/logolavanderia.png', href: '/lavanderia', alt: 'Lavandería', label: 'Lavandería y tintorería' },
-    { src: '/Tapiceria-logo.png', href: '/tapiceria', alt: 'Tapicería', label: 'Lavado y retapizado de muebles' },
-    { src: '/Productos-logo.png', href: '/productos', alt: 'Productos', label: 'Productos de limpieza' },
+    { src: '/tapiceria-logo.png', href: '/tapiceria', alt: 'Tapicería', label: 'Lavado y retapizado de muebles' },
+    { src: '/productos-logo.png', href: '/productos', alt: 'Productos', label: 'Productos de limpieza' },
 ];
 
 const textLinks = [
