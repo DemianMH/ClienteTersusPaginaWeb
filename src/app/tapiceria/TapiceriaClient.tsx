@@ -3,28 +3,38 @@ import React from 'react';
 import Image from 'next/image';
 import { FaHome, FaBuilding, FaChair, FaTint, FaFeatherAlt, FaMagic, FaWhatsapp, FaHandsHelping, FaClock, FaCheckCircle } from 'react-icons/fa';
 
-// Se definen los tipos para las propiedades del componente
 type GaleriaConLogoProps = {
     imgSrc: string;
     imgAlt: string;
     logoSrc: string;
 };
 
-// Se aplica el tipado al componente
 const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc }) => (
-    <div className="relative group rounded-xl shadow-lg overflow-hidden p-2 bg-white">
-        <div className="relative h-64 rounded-lg overflow-hidden">
+    <div className="relative group rounded-xl shadow-lg p-2 bg-white">
+        <div className="relative h-64 rounded-lg">
             <Image
                 src={imgSrc}
                 alt={imgAlt}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-300 group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
             />
             <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            
+            <div className="absolute bottom-0 left-0 w-40 h-auto z-10 transform translate-y-[10%]">
+                <Image
+                    src="/mascota-enmarco.png"
+                    alt="Mascota Tersus"
+                    width={150}
+                    height={150}
+                    className="object-contain"
+                    loading="lazy"
+                />
+            </div>
         </div>
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white/80 p-2 rounded-full shadow-lg z-10">
+        
+        {/* Logo superior */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white/80 p-2 rounded-full shadow-lg z-20">
             <Image
                 src={logoSrc}
                 alt="Logo de la sección"
@@ -35,7 +45,6 @@ const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc
         </div>
     </div>
 );
-
 
 const galleryImagesHogar = [
     { src: '/sala-limpia-4.jpg', alt: 'Sofá de sala limpio y renovado' },
@@ -64,94 +73,6 @@ const GaleriaDinamica: React.FC<GaleriaDinamicaProps> = ({ images, logo }) => (
         </div>
     </div>
 );
-
-
-const TapiceriaClient = () => {
-const [activeTab, setActiveTab] = React.useState('hogar');
-
-const renderContent = () => {
-    switch (activeTab) {
-    case 'hogar':
-        return <HogarContent />;
-    case 'corporativo':
-        return <CorporativoContent />;
-    default:
-        return <HogarContent />;
-    }
-};
-
-return (
-    <>
-    <div className="relative w-full h-48 md:h-64 flex items-center justify-center bg-gray-100 pt-16">
-        <div className="absolute inset-0">
-            <Image
-                src="/sala-limpia-6.jpg"
-                alt="Fondo de Tapicería"
-                layout="fill"
-                objectFit="cover"
-                className="opacity-30"
-            />
-        </div>
-        <div className="relative z-10 flex space-x-2 md:space-x-4"> 
-        <button
-            onClick={() => setActiveTab('hogar')}
-            className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
-            activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-            }`}
-        >
-            <FaHome />
-            <span>Para Tú Hogar</span>
-        </button>
-        <button
-            onClick={() => setActiveTab('corporativo')}
-            className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
-            activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-            }`}
-        >
-            <FaBuilding />
-            <span>Para Tú Negocio</span>
-        </button>
-        </div>
-    </div>
-    <div className="container mx-auto px-4 py-8">
-        {renderContent()}
-    </div>
-
-    <div className="container mx-auto px-4 py-16">
-            <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Nuestro Proceso de Limpieza de Tapicería</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
-                    <FaClock className="text-green-500 text-5xl mb-3" />
-                    <h3 className="font-semibold text-gray-800 text-xl mb-2">1. Evaluación Detallada</h3>
-                    <p className="text-gray-600 text-sm">Inspeccionamos el tipo de tela, el nivel de suciedad y las manchas para determinar el mejor método de limpieza.</p>
-                </div>
-                <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
-                    <FaHandsHelping className="text-green-500 text-5xl mb-3" />
-                    <h3 className="font-semibold text-gray-800 text-xl mb-2">2. Pre-Lavado</h3>
-                    <p className="text-gray-600 text-sm">Aplicamos soluciones especializadas para ablandar la suciedad y tratar las manchas más difíciles antes de la limpieza profunda.</p>
-                </div>
-                <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
-                    <FaChair className="text-green-500 text-5xl mb-3" />
-                    <h3 className="font-semibold text-gray-800 text-xl mb-2">3. Limpieza Profunda</h3>
-                    <p className="text-gray-600 text-sm">Utilizamos equipos de inyección y extracción para eliminar a fondo la suciedad, los alérgenos y los residuos.</p>
-                </div>
-                <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
-                    <FaCheckCircle className="text-green-500 text-5xl mb-3" />
-                    <h3 className="font-semibold text-gray-800 text-xl mb-2">4. Inspección Final</h3>
-                    <p className="text-gray-600 text-sm">Aseguramos un secado adecuado y realizamos una revisión final para garantizar resultados impecables y tu total satisfacción.</p>
-                </div>
-            </div>
-        </div>
-
-        {activeTab === 'hogar' ? (
-            <GaleriaDinamica images={galleryImagesHogar} logo="/tapiceria-logo.png" />
-        ) : (
-            <GaleriaDinamica images={galleryImagesCorporativo} logo="tapiceria-logo.png" />
-        )}
-
-    </>
-);
-};
 
 const HogarContent = () => (
     <div>
@@ -233,4 +154,100 @@ const CorporativoContent = () => (
     </div>
 );
 
+const TapiceriaClient = () => {
+    const [activeTab, setActiveTab] = React.useState('hogar');
+
+    const renderContent = () => {
+        switch (activeTab) {
+        case 'hogar':
+            return <HogarContent />;
+        case 'corporativo':
+            return <CorporativoContent />;
+        default:
+            return <HogarContent />;
+        }
+    };
+
+    return (
+    <>
+        <div className="relative w-full h-48 md:h-64 flex items-center justify-center bg-gray-100 pt-16">
+            <div className="absolute inset-0">
+                <Image
+                    src="/sala-limpia-6.jpg"
+                    alt="Fondo de Tapicería"
+                    fill
+                    className="object-cover opacity-30"
+                />
+            </div>
+            <div className="relative z-10 flex space-x-2 md:space-x-4">
+            <button
+                onClick={() => setActiveTab('hogar')}
+                className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
+                activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+                }`}
+            >
+                <FaHome />
+                <span>Para Tú Hogar</span>
+            </button>
+            <button
+                onClick={() => setActiveTab('corporativo')}
+                className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${
+                activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+                }`}
+            >
+                <FaBuilding />
+                <span>Para Tú Negocio</span>
+            </button>
+            </div>
+        </div>
+        <div className="container mx-auto px-4 py-8">
+            {renderContent()}
+        </div>
+
+        <div className="container mx-auto px-4 py-16">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center">
+                <div className="w-40 md:w-48">
+                    <Image
+                        src="/mascota-tersus-segundaP.png"
+                        alt="Mascota Proceso Tapicería"
+                        width={250}
+                        height={250}
+                        className="object-contain"
+                    />
+                </div>
+                <h2 className="text-blue-800 font-bold text-4xl">Nuestro Proceso de Limpieza de Tapicería</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+                <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
+                    <FaClock className="text-green-500 text-5xl mb-3" />
+                    <h3 className="font-semibold text-gray-800 text-xl mb-2">1. Evaluación Detallada</h3>
+                    <p className="text-gray-600 text-sm">Inspeccionamos el tipo de tela, el nivel de suciedad y las manchas para determinar el mejor método de limpieza.</p>
+                </div>
+                <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
+                    <FaHandsHelping className="text-green-500 text-5xl mb-3" />
+                    <h3 className="font-semibold text-gray-800 text-xl mb-2">2. Pre-Lavado</h3>
+                    <p className="text-gray-600 text-sm">Aplicamos soluciones especializadas para ablandar la suciedad y tratar las manchas más difíciles antes de la limpieza profunda.</p>
+                </div>
+                <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
+                    <FaChair className="text-green-500 text-5xl mb-3" />
+                    <h3 className="font-semibold text-gray-800 text-xl mb-2">3. Limpieza Profunda</h3>
+                    <p className="text-gray-600 text-sm">Utilizamos equipos de inyección y extracción para eliminar a fondo la suciedad, los alérgenos y los residuos.</p>
+                </div>
+                <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
+                    <FaCheckCircle className="text-green-500 text-5xl mb-3" />
+                    <h3 className="font-semibold text-gray-800 text-xl mb-2">4. Inspección Final</h3>
+                    <p className="text-gray-600 text-sm">Aseguramos un secado adecuado y realizamos una revisión final para garantizar resultados impecables y tu total satisfacción.</p>
+                </div>
+            </div>
+        </div>
+
+        {activeTab === 'hogar' ? (
+            <GaleriaDinamica images={galleryImagesHogar} logo="/tapiceria-logo.png" />
+        ) : (
+            <GaleriaDinamica images={galleryImagesCorporativo} logo="/tapiceria-logo.png" />
+        )}
+
+        </>
+    );
+};
 export default TapiceriaClient;

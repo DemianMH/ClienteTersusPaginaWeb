@@ -20,9 +20,8 @@ export default function ContactoClient() {
                 <Image
                     src="/persona_trabajando.png" 
                     alt="Contacto Tersus Clean"
-                    layout="fill"
-                    objectFit="cover"
-                    className="z-0 rendered-lg"
+                    fill
+                    className="object-cover z-0"
                     priority // Prioriza la carga de la imagen principal
                 />
                 <div className="absolute inset-0 bg-blue-800 opacity-70 z-0"></div>

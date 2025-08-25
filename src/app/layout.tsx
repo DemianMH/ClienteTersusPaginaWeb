@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon" href="/logovectores.svg" type="image/svg+xml" />
       </head>
-      {/* Se aplica la clase de la fuente al body */}
+
       <body className={`${inter.className} flex flex-col min-h-screen bg-gray-50`}>
         <Nav />
         <main className="flex-grow">

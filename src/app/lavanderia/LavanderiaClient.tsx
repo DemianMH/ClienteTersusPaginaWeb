@@ -15,10 +15,9 @@ const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc
             <Image
                 src={imgSrc}
                 alt={imgAlt}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-300 group-hover:scale-105"
-                loading="lazy" 
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
             />
             <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
         </div>
@@ -101,21 +100,31 @@ export default function LavanderiaClient() {
             <Image
                 src="/lavanderia_lavadoras.png"
                 alt="Fondo de Lavandería"
-                layout="fill"
-                objectFit="cover"
-                className="opacity-30"
-                priority // Prioriza la carga de la imagen principal
+                fill
+                className="object-cover opacity-30"
+                priority
             />
         </div>
-        <div className="relative z-10 flex space-x-2 md:space-x-4"> 
+        <div className="relative z-10 flex space-x-2 md:space-x-4">
             <button onClick={() => setActiveTab('hogar')} className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${activeTab === 'hogar' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'}`}><FaHome /><span>Para Tú Hogar</span></button>
             <button onClick={() => setActiveTab('corporativo')} className={`flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full font-semibold transition-colors ${activeTab === 'corporativo' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'}`}><FaBuilding /><span>Para Tú Negocio</span></button>
         </div>
       </div>
       <div className="container mx-auto px-4 py-8">{renderContent()}</div>
       <div className="container mx-auto px-4 py-16">
-            <h2 className="text-blue-800 font-bold text-4xl text-center mb-12">Nuestro Proceso Simplificado</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center">
+                <div className="w-40 md:w-48">
+                    <Image
+                        src="/mascota-tersus-segundaP.png"
+                        alt="Mascota Proceso Lavandería"
+                        width={250}
+                        height={250}
+                        className="object-contain"
+                    />
+                </div>
+                <h2 className="text-blue-800 font-bold text-4xl">Nuestro Proceso Simplificado</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
                 <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md"><FaTshirt className="text-green-500 text-5xl mb-3" /><h3 className="font-semibold text-gray-800 text-xl mb-2">1. Recepción</h3><p className="text-gray-600 text-sm">Trae tu ropa o solicita nuestro servicio de recolección. Clasificamos tus prendas para darles el mejor tratamiento.</p></div>
                 <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md"><FaHandsHelping className="text-green-500 text-5xl mb-3" /><h3 className="font-semibold text-gray-800 text-xl mb-2">2. Lavado Profesional</h3><p className="text-gray-600 text-sm">Utilizamos detergentes de alta calidad y equipos modernos que cuidan tus prendas y el medio ambiente.</p></div>
                 <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md"><FaClock className="text-green-500 text-5xl mb-3" /><h3 className="font-semibold text-gray-800 text-xl mb-2">3. Secado y Planchado</h3><p className="text-gray-600 text-sm">Secamos tus prendas a la temperatura ideal y ofrecemos un planchado experto para un acabado perfecto.</p></div>
@@ -144,5 +153,5 @@ export default function LavanderiaClient() {
             </div>
         </div>
     </>
-  );
+);
 };

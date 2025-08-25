@@ -18,6 +18,7 @@ interface CardProps {
   category: string;
 }
 
+// *** COMPONENTE CARD MODIFICADO ***
 const Card = React.memo(function Card({ image, title, category }: CardProps) {
   const whatsappLink = "https://wa.me/523323254619?text=Hola%2C%20me%20gustaria%20saber%20mas%20sobre%20sus%20servicios.";
   return (
@@ -28,6 +29,17 @@ const Card = React.memo(function Card({ image, title, category }: CardProps) {
           <p className="text-white font-bold uppercase text-xs tracking-wider">{category}</p>
           <h3 className="font-extrabold text-white leading-[1.2] text-[32px] mt-2 cursor-default drop-shadow-lg">{title}</h3>
         </div>
+        <div className="absolute bottom-0 left-0 w-80 h-auto">
+            <Image 
+                src="/mascota-tersus-segundaP.png"
+                alt="Mascota Tersus"
+                width={200}
+                height={200}
+                className="object-contain"
+                loading="lazy"
+            />
+        </div>
+
         <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="absolute bottom-6 right-6 bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition-colors shadow-lg">
           <FaWhatsapp className="h-6 w-6" />
         </a>
@@ -224,9 +236,9 @@ export default function Inicio() {
                   <div className="flex flex-col items-center text-center p-4"><FaAward className="text-green-500 text-5xl mb-2" /><h3 className="font-semibold text-white text-lg">Personal Experimentado</h3></div>
                   <div className="flex flex-col items-center text-center p-4"><FaTools className="text-green-500 text-5xl mb-2" /><h3 className="font-semibold text-white text-lg">Suministros de Limpieza de Calidad</h3></div>
               </div>
-              <button className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-500 transition-colors">
-                  <Link href="/contacto">Cotizaciones</Link>
-              </button>
+              <Link href="/contacto" className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-600 transition-colors">
+                  Cotizaciones
+              </Link>
             </div>
         </div>
       </div>

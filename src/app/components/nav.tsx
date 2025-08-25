@@ -52,14 +52,29 @@ export default function Nav() {
                     <div className="hidden md:flex flex-1 justify-center">
                         <div className="relative group">
                             <Link href={mainLogo.href}>
-                                <Image src={mainLogo.src} alt={mainLogo.alt} width={50} height={50} style={{objectFit: "contain"}} className="transition-transform duration-300 group-hover:scale-110" />
+                                <Image 
+                                  src={mainLogo.src} 
+                                  alt={mainLogo.alt} 
+                                  width={50} 
+                                  height={50} 
+                                  style={{objectFit: "contain"}} 
+                                  className="transition-transform duration-300 group-hover:scale-110"
+                                  priority // Prioriza la carga del logo principal
+                                />
                             </Link>
                             <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-max opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-[-10px]">
                                 <div className="flex items-center gap-x-5">
                                     {dropdownLogos.map((logo) => (
                                         <Link key={logo.href} href={logo.href} onClick={() => setMainLogo(logo)} className="transition-transform hover:scale-110">
                                             <div className="bg-white/30 backdrop-blur-md p-1.5 rounded-full shadow-lg">
-                                                <Image src={logo.src} alt={logo.alt} width={150} height={150} className="rounded-full" />
+                                                <Image 
+                                                  src={logo.src} 
+                                                  alt={logo.alt} 
+                                                  width={150} 
+                                                  height={150} 
+                                                  className="rounded-full"
+                                                  loading="lazy" // Carga diferida para logos del menú
+                                                />
                                             </div>
                                         </Link>
                                     ))}
@@ -81,7 +96,14 @@ export default function Nav() {
                     </div>
                     <div className="md:hidden flex-1 flex justify-center">
                         <Link href={mainLogo.href}>
-                            <Image src={mainLogo.src} alt={mainLogo.alt} width={50} height={50} style={{objectFit: "contain"}} />
+                            <Image 
+                              src={mainLogo.src} 
+                              alt={mainLogo.alt} 
+                              width={50} 
+                              height={50} 
+                              style={{objectFit: "contain"}}
+                              priority // Prioriza también el logo principal en móvil
+                            />
                         </Link>
                     </div>
                     <div className="md:hidden flex-1"></div>
@@ -111,7 +133,14 @@ export default function Nav() {
                                     className={`flex items-center gap-x-4 py-2 px-2 rounded-md hover:bg-gray-100 transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
                                     style={{ transitionDelay: `${200 + index * 75}ms` }}
                                 >
-                                    <Image src={logo.src} alt={logo.alt} width={50} height={50} className="rounded-full bg-white/30 backdrop-blur-md p-0.5" />
+                                    <Image 
+                                      src={logo.src} 
+                                      alt={logo.alt} 
+                                      width={50} 
+                                      height={50} 
+                                      className="rounded-full bg-white/30 backdrop-blur-md p-0.5"
+                                      loading="lazy"
+                                    />
                                     <span className="font-semibold text-gray-700 text-base">{logo.label}</span>
                                 </Link>
                             ))}
