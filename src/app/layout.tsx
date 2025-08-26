@@ -1,6 +1,8 @@
 import "./globals.css";
 import Footer from "@/app/components/footer";
 import Nav from "@/app/components/nav";
+import WhatsAppButton from '@/app/components/WhatsAppButton';
+
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -26,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-grow">
           {children}
         </main>
+        <WhatsAppButton />
         <Footer />
       </body>
     </html>

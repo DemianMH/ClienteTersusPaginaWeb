@@ -45,7 +45,7 @@ export default function ContactoClient() {
                                 <a href={facebookLink} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-blue-700 hover:text-blue-800 transition-colors"><FaFacebook className="text-4xl" /></a>
                                 <a href={tiktokLink} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-black hover:text-gray-700 transition-colors"><FaTiktok className="text-4xl" /></a>
                                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-green-500 hover:text-green-600 transition-colors"><FaWhatsapp className="text-4xl" /></a>
-                                <a href={instagramLink} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2 rounded-md bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white hover:opacity-90 transition-opacity"><FaInstagram className="text-4xl" /></a>
+                                <a href={instagramLink} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-0 rounded-md bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white hover:opacity-90 transition-opacity"><FaInstagram className="text-4xl" /></a>
                             </div>
                         </div>
                     </div>

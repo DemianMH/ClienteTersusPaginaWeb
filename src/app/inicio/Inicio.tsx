@@ -180,7 +180,7 @@ export default function Inicio() {
         <h2 className='text-black text-center text-3xl font-bold mb-4'>Sobre nosotros</h2>
         <p className='text-black text-lg text-justify py-10'>Somos un equipo de profesionales dedicados a ofrecerte soluciones de limpieza integrales. Nuestra misión es transformar tus espacios, brindando un ambiente fresco, saludable y reluciente. Con años de experiencia y productos de la más alta calidad, garantizamos tu satisfacción en cada servicio.</p>
         <div>
-            <div className="relative w-full h-64 md:h-96 rounded-xl shadow-lg overflow-hidden">
+            <div className="relative w-full h-64 md:h-96 rounded-xl shadow-lg ">
                 <video
                     className="absolute inset-0 w-full h-full object-cover"
                     src="/video-sala.mp4"
@@ -190,7 +190,16 @@ export default function Inicio() {
                 <div className="absolute -top-2 md:-top-2 left-1/2 -translate-x-1/2 bg-white p-2 rounded-lg shadow-xl z-30">
                     <Image src="/tersus-logo.png" alt="Logo-tersus" width={40} height={40} className="object-contain" loading="lazy" />
                 </div>
-                <Image src="/mascota-tersus.png" alt="Mascota de Tersus" width={400} height={400} className="absolute bottom-0 left-0 z-20 w-48 h-auto object-contain md:w-64 transform translate-x-[-15%] translate-y-[15%]" loading="lazy" />
+                <div className="absolute bottom-0 left-0 w-40 h-auto z-10 transform translate-y-[10%]">
+                                <Image
+                                    src="/mascota-enmarco.png"
+                                    alt="Mascota Tersus"
+                                    width={150}
+                                    height={150}
+                                    className="object-contain"
+                                    loading="lazy"
+                                />
+                            </div>
             </div>
         </div>
       </div>

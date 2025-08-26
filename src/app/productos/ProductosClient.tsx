@@ -102,7 +102,7 @@ export default function ProductosClient() {
                 />
                 <div className="absolute inset-0 bg-blue-800 opacity-60 z-0"></div>
                 <div className="relative z-10 text-center text-white p-4">
-                    <h1 className="text-5xl font-bold mb-4">Nuestro Catálogo de Productos</h1>
+                    <h1 className="text-4xl font-bold mb-4">Nuestro Catálogo de Productos</h1>
                     <p className="text-xl">Descubre la excelencia en limpieza para tu hogar y negocio.</p>
                 </div>
             </div>

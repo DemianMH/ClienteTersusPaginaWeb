@@ -6,7 +6,7 @@ import { FaUsers, FaHandshake, FaStar, FaLightbulb, FaCheckCircle, FaLeaf, FaAwa
 export default function NosotrosClient() {
     return (
         <>
-            <div className="relative w-full h-80 md:h-96 overflow-hidden pt-16 flex items-center justify-center">
+            <div className="relative w-full h-80 md:h-96 flex items-center justify-center">
                 <Image
                     src="/camioneta-tersus.jpg"
                     alt="Acerca de Tersus Clean"
@@ -14,23 +14,24 @@ export default function NosotrosClient() {
                     className="object-cover z-0"
                     priority
                 />
+                <div className="absolute bottom-0 left-0 w-40 h-auto z-10 transform translate-y-[10%]">
+                                <Image
+                                    src="/mascota-enmarco.png"
+                                    alt="Mascota Tersus"
+                                    width={150}
+                                    height={150}
+                                    className="object-contain"
+                                    loading="lazy"
+                                />
+                            </div>
                 <div className="absolute inset-0 bg-blue-800 opacity-70 z-0"></div>
                 <div className="relative z-10 text-center text-white p-4">
-                    <h1 className="text-5xl font-bold mb-4">Conoce a Tersus Clean</h1>
+                    <h1 className="text-4xl font-bold mb-4">Conoce a Tersus Clean</h1>
                     <p className="text-xl md:text-2xl">Expertos en limpieza que transforman tus espacios.</p>
                 </div>
             </div>
-            <div className="container mx-auto px-4 py-16 md:py-24">
-                <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                    <div className="w-48 md:w-1/3">
-                        <Image
-                            src="/mascota-tersus.png"
-                            alt="Mascota Tersus Misión"
-                            width={300}
-                            height={300}
-                            className="object-contain"
-                        />
-                    </div>
+            <div className="container mx-auto px-2 py-16 md:py-24">
+                <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
                     <div className="md:w-2/3 text-center">
                         <h2 className="text-blue-800 font-bold text-4xl mb-4">Nuestra Misión</h2>
                         <p className="text-lg text-gray-700 max-w-3xl mx-auto">

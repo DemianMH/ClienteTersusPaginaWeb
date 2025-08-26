@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { useState, useMemo, useCallback } from 'react';
 
 const logoLinks = [
-    { src: '/Tersus-logo.png', href: '/', alt: 'Tersus Principal', label: 'Inicio' },
+    { src: '/tersus-logo.png', href: '/', alt: 'Tersus Principal', label: 'Inicio' },
     { src: '/logolavanderia.png', href: '/lavanderia', alt: 'Lavandería', label: 'Lavandería y tintorería' },
-    { src: '/Tapiceria-logo.png', href: '/tapiceria', alt: 'Tapicería', label: 'Lavado y retapizado de muebles' },
-    { src: '/Productos-logo.png', href: '/productos', alt: 'Productos', label: 'Productos de limpieza' },
+    { src: '/tapiceria-logo.png', href: '/tapiceria', alt: 'Tapicería', label: 'Lavado y retapizado de muebles' },
+    { src: '/productos-logo.png', href: '/productos', alt: 'Productos', label: 'Productos de limpieza' },
 ];
 
 const textLinks = [
@@ -53,13 +53,13 @@ export default function Nav() {
                         <div className="relative group">
                             <Link href={mainLogo.href}>
                                 <Image 
-                                  src={mainLogo.src} 
-                                  alt={mainLogo.alt} 
-                                  width={50} 
-                                  height={50} 
-                                  style={{objectFit: "contain"}} 
-                                  className="transition-transform duration-300 group-hover:scale-110"
-                                  priority // Prioriza la carga del logo principal
+                                src={mainLogo.src} 
+                                alt={mainLogo.alt} 
+                                width={50} 
+                                height={50} 
+                                style={{objectFit: "contain"}} 
+                                className="transition-transform duration-300 group-hover:scale-110"
+                                priority
                                 />
                             </Link>
                             <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-max opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-[-10px]">
@@ -68,12 +68,12 @@ export default function Nav() {
                                         <Link key={logo.href} href={logo.href} onClick={() => setMainLogo(logo)} className="transition-transform hover:scale-110">
                                             <div className="bg-white/30 backdrop-blur-md p-1.5 rounded-full shadow-lg">
                                                 <Image 
-                                                  src={logo.src} 
-                                                  alt={logo.alt} 
-                                                  width={150} 
-                                                  height={150} 
-                                                  className="rounded-full"
-                                                  loading="lazy" // Carga diferida para logos del menú
+                                                src={logo.src} 
+                                                alt={logo.alt} 
+                                                width={150} 
+                                                height={150} 
+                                                className="rounded-full"
+                                                loading="lazy" 
                                                 />
                                             </div>
                                         </Link>
@@ -97,12 +97,12 @@ export default function Nav() {
                     <div className="md:hidden flex-1 flex justify-center">
                         <Link href={mainLogo.href}>
                             <Image 
-                              src={mainLogo.src} 
-                              alt={mainLogo.alt} 
-                              width={50} 
-                              height={50} 
-                              style={{objectFit: "contain"}}
-                              priority // Prioriza también el logo principal en móvil
+                            src={mainLogo.src} 
+                            alt={mainLogo.alt} 
+                            width={50} 
+                            height={50} 
+                            style={{objectFit: "contain"}}
+                            priority
                             />
                         </Link>
                     </div>
@@ -134,12 +134,12 @@ export default function Nav() {
                                     style={{ transitionDelay: `${200 + index * 75}ms` }}
                                 >
                                     <Image 
-                                      src={logo.src} 
-                                      alt={logo.alt} 
-                                      width={50} 
-                                      height={50} 
-                                      className="rounded-full bg-white/30 backdrop-blur-md p-0.5"
-                                      loading="lazy"
+                                    src={logo.src} 
+                                    alt={logo.alt} 
+                                    width={50} 
+                                    height={50} 
+                                    className="rounded-full bg-white/30 backdrop-blur-md p-0.5"
+                                    loading="lazy"
                                     />
                                     <span className="font-semibold text-gray-700 text-base">{logo.label}</span>
                                 </Link>

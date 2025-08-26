@@ -20,7 +20,6 @@ const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc
                 loading="lazy"
             />
             <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-            
             <div className="absolute bottom-0 left-0 w-40 h-auto z-10 transform translate-y-[10%]">
                 <Image
                     src="/mascota-enmarco.png"
@@ -41,6 +40,7 @@ const GaleriaConLogo: React.FC<GaleriaConLogoProps> = ({ imgSrc, imgAlt, logoSrc
                 width={40}
                 height={40}
                 className="object-contain"
+                loading="lazy"
             />
         </div>
     </div>
@@ -177,6 +177,7 @@ const TapiceriaClient = () => {
                     alt="Fondo de Tapicería"
                     fill
                     className="object-cover opacity-30"
+                    loading='lazy'
                 />
             </div>
             <div className="relative z-10 flex space-x-2 md:space-x-4">
@@ -206,15 +207,6 @@ const TapiceriaClient = () => {
 
         <div className="container mx-auto px-4 py-16">
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center">
-                <div className="w-40 md:w-48">
-                    <Image
-                        src="/mascota-tersus-segundaP.png"
-                        alt="Mascota Proceso Tapicería"
-                        width={250}
-                        height={250}
-                        className="object-contain"
-                    />
-                </div>
                 <h2 className="text-blue-800 font-bold text-4xl">Nuestro Proceso de Limpieza de Tapicería</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
