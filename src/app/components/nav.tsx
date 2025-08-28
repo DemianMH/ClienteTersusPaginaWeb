@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useMemo, useCallback } from 'react';
+// Importamos los iconos que vamos a usar
+import { FaPhone, FaEnvelope } from 'react-icons/fa';
 
 const logoLinks = [
     { src: '/tersus-logo.png', href: '/', alt: 'Tersus Principal', label: 'Inicio' },
@@ -16,6 +18,7 @@ const textLinks = [
     { href: '/contacto', label: 'Contacto' },
 ];
 
+// ... (El resto de tus componentes de iconos como MenuIcon y HomeIcon se quedan igual)
 const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -27,6 +30,7 @@ const HomeIcon = (props: React.SVGProps<SVGSVGElement>) => (
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
     </svg>
 );
+
 
 export default function Nav() {
     const [mainLogo, setMainLogo] = useState(logoLinks[0]);
@@ -48,7 +52,18 @@ export default function Nav() {
         <>
             <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-40">
                 <div className="container mx-auto px-4 flex justify-between items-center h-16">
-                    <div className="hidden md:flex flex-1"></div>
+                    {/* --- NUEVO: Información de contacto a la izquierda en desktop --- */}
+                    <div className="hidden md:flex flex-1 items-center gap-x-6">
+                        <a href="tel:+523323254619" className="flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                            <FaPhone />
+                            <span>33 2325 4619</span>
+                        </a>
+                        <a href="mailto:tersuscleangdl@gmail.com" className="flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                            <FaEnvelope />
+                            <span>Email</span>
+                        </a>
+                    </div>
+
                     <div className="hidden md:flex flex-1 justify-center">
                         <div className="relative group">
                             <Link href={mainLogo.href}>
@@ -89,6 +104,8 @@ export default function Nav() {
                             ))}
                         </ul>
                     </div>
+
+                    {/* --- Navegación Móvil (sin cambios en la estructura, solo contenido) --- */}
                     <div className="md:hidden flex-1">
                         <button onClick={() => setIsMobileMenuOpen(true)} aria-label="Abrir menú">
                             <MenuIcon className="h-6 w-6 text-gray-700" />
@@ -110,11 +127,13 @@ export default function Nav() {
                 </div>
             </nav>
 
+            {/* --- Menú Móvil --- */}
             <div className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <div className="fixed inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)}></div>
                 <div className={`fixed top-0 left-0 bottom-0 bg-white w-80 shadow-xl p-5 transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                     <div className="flex flex-col h-full pt-4">
                         <nav className="flex flex-col gap-y-2 text-lg">
+                            {/* ... Tus links de Inicio, Lavandería, etc. se quedan igual ... */}
                             <Link 
                                 href="/" 
                                 onClick={() => handleMobileLinkClick(logoLinks[0])} 
@@ -157,6 +176,18 @@ export default function Nav() {
                                 </Link>
                             ))}
                         </nav>
+
+                        <div className="mt-auto pb-4 flex flex-col gap-y-4">
+                            <hr />
+                            <a href="tel:+523323254619" className="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                                <FaPhone />
+                                <span>Llamar ahora</span>
+                            </a>
+                            <a href="mailto:tersuscleangdl@gmail.com" className="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                                <FaEnvelope />
+                                <span>Enviar correo</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, MouseEvent, TouchEvent, useCallback
 import { FaUsers, FaShieldAlt, FaAward, FaTools, FaWhatsapp } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
+import Testimonials from '@/app/components/Testimonials';
 
 const data = [
     { image: '/lavanderiascamaras.png', title: 'Servicios de Lavandería de Primera Calidad', category: 'Lavandería' },
@@ -245,9 +246,8 @@ export default function Inicio() {
                             ref={videoRef}
                             className="absolute inset-0 w-full h-full object-cover rounded-xl"
                             src="/videoTersusListo.mp4"
-                            poster="/sala-limpia.jpg"
-                            loop
-                            muted
+                            poster="/previsualizacionvideo.png"
+                            loop    
                             playsInline
                             preload="metadata"
                         ></video>
@@ -309,6 +309,8 @@ export default function Inicio() {
                     ))}
                 </div>
             </div>
+
+            <Testimonials /> 
 
             <div>
                 <div className="relative py-16 md:py-24 overflow-hidden">
