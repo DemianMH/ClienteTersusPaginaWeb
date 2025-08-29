@@ -58,10 +58,6 @@ export default function Inicio() {
     const [prevTranslate, setPrevTranslate] = useState(0);
     const [animationEnabled, setAnimationEnabled] = useState(true);
 
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const playPauseBtnRef = useRef<HTMLButtonElement>(null);
-    const controlsContainerRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         const handleResize = () => {
             setSlidesToShow(window.innerWidth < 640 ? 1 : 2);
@@ -153,64 +149,6 @@ export default function Inicio() {
         }
     }, [currentSlide, isDragging, getSlideWidth, setSliderTransform]);
 
-    useEffect(() => {
-        const video = videoRef.current;
-        const playPauseBtn = playPauseBtnRef.current;
-        const controlsContainer = controlsContainerRef.current;
-
-        if (!video || !playPauseBtn || !controlsContainer) return;
-
-        const playIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-        const pauseIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-
-        const togglePlayPause = () => {
-            if (video.paused || video.ended) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        };
-
-        const hideControls = () => {
-            controlsContainer.style.opacity = '0';
-            controlsContainer.style.pointerEvents = 'none';
-        };
-
-        const showControls = () => {
-            controlsContainer.style.opacity = '1';
-            controlsContainer.style.pointerEvents = 'auto';
-        };
-
-        const updateUI = () => {
-            if (video.paused || video.ended) {
-                playPauseBtn.innerHTML = playIcon;
-                showControls();
-            } else {
-                playPauseBtn.innerHTML = pauseIcon;
-                hideControls();
-            }
-        };
-
-        video.addEventListener('play', updateUI);
-        video.addEventListener('pause', updateUI);
-        video.addEventListener('ended', updateUI);
-        
-        playPauseBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            togglePlayPause();
-        });
-
-        video.addEventListener('click', togglePlayPause);
-
-        return () => {
-            video.removeEventListener('play', updateUI);
-            video.removeEventListener('pause', updateUI);
-            video.removeEventListener('ended', updateUI);
-            playPauseBtn.removeEventListener('click', togglePlayPause);
-            video.removeEventListener('click', togglePlayPause);
-        };
-    }, []);
-
     const cursorClass = isDragging ? 'cursor-grabbing' : 'cursor-grab';
     const selectClass = isDragging ? 'select-none' : '';
 
@@ -241,20 +179,18 @@ export default function Inicio() {
                 <h2 className='text-black text-center text-3xl font-bold mb-4'>Sobre nosotros</h2>
                 <p className='text-black text-lg text-justify py-10'>Somos un equipo de profesionales dedicados a ofrecerte soluciones de limpieza integrales. Nuestra misión es transformar tus espacios, brindando un ambiente fresco, saludable y reluciente. Con años de experiencia y productos de la más alta calidad, garantizamos tu satisfacción en cada servicio.</p>
                 <div>
-                    <div className="group relative w-full h-64 md:h-[500px] rounded-xl shadow-lg">
-                        <video
-                            ref={videoRef}
-                            className="absolute inset-0 w-full h-full object-cover rounded-xl"
-                            src="/videoTersusListo.mp4"
-                            poster="/previsualizacionvideo.png"
-                            loop    
-                            playsInline
-                            preload="metadata"
-                        ></video>
+                    <div className="relative w-full h-64 md:h-[500px] rounded-xl shadow-lg overflow-hidden">
+                        <iframe
+                            className="absolute top-0 left-0 w-full h-full"
+                            src="https://www.youtube.com/embed/HmsTidCKJfc?controls=1&rel=0&showinfo=0"
+                            title="Video de presentación de Tersus Clean"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
                         <div className="absolute -top-2 md:-top-2 left-1/2 -translate-x-1/2 bg-white p-2 rounded-lg shadow-xl z-30">
                             <Image src="/tersus-logo.png" alt="Logo-tersus" width={40} height={40} className="object-contain" loading="lazy" />
                         </div>
-                        <div className="absolute bottom-0 left-0 w-40 h-auto z-10 transform translate-y-[10%]">
+                        <div className="absolute bottom-0 left-0 w-40 h-auto z-10 transform translate-y-[10%] pointer-events-none">
                             <Image
                                 src="/mascota-enmarco.png"
                                 alt="Mascota Tersus"
@@ -263,20 +199,6 @@ export default function Inicio() {
                                 className="object-contain"
                                 loading="lazy"
                             />
-                        </div>
-                        <div
-                            ref={controlsContainerRef}
-                            className="absolute inset-0 flex justify-center items-center bg-black/30 transition-opacity duration-300 z-20 rounded-xl"
-                        >
-                            <button
-                                ref={playPauseBtnRef}
-                                className="bg-white/30 text-white backdrop-blur-sm rounded-full w-20 h-20 flex items-center justify-center transform hover:scale-110 transition-transform"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </button>
                         </div>
                     </div>
                 </div>
